@@ -22,7 +22,7 @@ const TodosCatalog = () => {
             {loading ? (
                 <CustomSpinner />
             ) : (
-                todos.map((todo) => <TodoCard todo={todo} />)
+                todos.map((todo) => <TodoCard todo={todo} key={todo.id} />)
             )}
         </Stack>
     );
