@@ -1,6 +1,6 @@
-
 const initialTodos = [
     {
+        id: 1,
         title: 'Wash the dishes',
         description:
             'Wash the dishes in the sink. Do it earlier since there will be more waste',
@@ -8,6 +8,7 @@ const initialTodos = [
         isDone: false,
     },
     {
+        id: 2,
         title: 'Wash the dishes',
         description:
             'Wash the dishes in the sink. Do it earlier since there will be more waste',
@@ -15,6 +16,7 @@ const initialTodos = [
         isDone: true,
     },
     {
+        id: 3,
         title: 'Wash the dishes',
         description:
             'Wash the dishes in the sink. Do it earlier since there will be more waste',
