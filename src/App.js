@@ -1,11 +1,14 @@
-import './App.css';
+import NavbarComponent from './components/Navbar';
+import TodosCatalog from './components/TodosCatalog';
 
-import Pet from './components/Pet';
+import styles from './App.module.css';
+
 function App() {
     return (
-        <div>
-            <h1>This is React App from My Api</h1>
-            <Pet />
+        <div className={styles['site-wrapper']}>
+            <NavbarComponent />
+            <h1>My Todos</h1>
+            <TodosCatalog />
         </div>
     );
 }
