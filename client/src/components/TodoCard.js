@@ -1,26 +1,39 @@
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import * as todoServices from '../services/todoServices';
 
 function TodoCard({ todo }) {
+    // If not using state, it will not rerender (only after refresh which is not what we want)
+    const [currentTodo, setCurrentTodo] = useState(todo);
 
     let buttonComponent = null;
+    const onClickHandler = (e) => {
+        todoServices.completeTodo(currentTodo).then((newTodo) => {
+            setCurrentTodo(newTodo);
+        });
+    };
 
-    if (todo.isDone) {
+    if (currentTodo.isDone) {
         buttonComponent = (
-            <Button disabled variant="success">
+            <Button onClick={onClickHandler} disabled variant="success">
                 Completed
             </Button>
         );
     } else {
-        buttonComponent = <Button variant="dark">Complete</Button>;
+        buttonComponent = (
+            <Button onClick={onClickHandler} variant="dark">
+                Complete
+            </Button>
+        );
     }
 
     return (
         <Card>
-            <Card.Header>{todo.timestamp}</Card.Header>
+            <Card.Header>{currentTodo.timestamp}</Card.Header>
             <Card.Body>
-                <Card.Title>{todo.title}</Card.Title>
-                <Card.Text>{todo.description}</Card.Text>
+                <Card.Title>{currentTodo.title}</Card.Title>
+                <Card.Text>{currentTodo.description}</Card.Text>
                 {buttonComponent}
             </Card.Body>
         </Card>
