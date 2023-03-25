@@ -12,7 +12,7 @@ function TodoCard({ todo }) {
             </Button>
         );
     } else {
-        buttonComponent = <Button variant="primary">Complete</Button>;
+        buttonComponent = <Button variant="dark">Complete</Button>;
     }
 
     return (
