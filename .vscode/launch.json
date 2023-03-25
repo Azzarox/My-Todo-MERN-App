@@ -11,20 +11,39 @@
             "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}/client/src"
         },
+        // {
+        //     // This debugs the api, it starts the server automatically
+        //     // it has warnings for protocol and port
+        //     "name": "Debug API",
+        //     "type": "node",
+        //     "request": "launch",
+        //     "program": "${workspaceFolder}/api/index.js",
+        //     "env": {
+        //         // "NODE_ENV": "development"
+        //     },
+        //     "outputCapture": "std",
+        //     "skipFiles": ["<node_internals>/**"],
+        //     "restart": true,
+        //     "protocol": "inspector",
+        //     "port": 9229
+        // },
+
+        // This works fine
         {
-            // This debugs the api, it starts the server automatically
             "name": "Debug API",
             "type": "node",
             "request": "launch",
             "program": "${workspaceFolder}/api/index.js",
             "env": {
-                // "NODE_ENV": "development"
+                "NODE_ENV": "development"
             },
             "outputCapture": "std",
-            "skipFiles": ["<node_internals>/**"],
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
             "restart": true,
-            "protocol": "inspector",
-            "port": 9229
+            "console": "integratedTerminal",
+            "sourceMaps": true
         }
     ]
 }
