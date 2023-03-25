@@ -1,0 +1,24 @@
+{
+  "name": "asd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"cd api && npm start\" \"cd client && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azzarox/My-Todo-MERN-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Azzarox/My-Todo-MERN-App/issues"
+  },
+  "homepage": "https://github.com/Azzarox/My-Todo-MERN-App#readme",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
