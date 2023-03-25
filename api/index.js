@@ -21,7 +21,7 @@ const getAllTodos = (req, res) => {
 const createTodo = (req, res) => {
     const newTodo = {
         title: 'Take a shower',
-        description: "Take a shower or you won't get them bitchez",
+        description: "Take a shower or you will repulse all the girls",
         timestamp: createTimestamp(),
         isDone: false,
     };
