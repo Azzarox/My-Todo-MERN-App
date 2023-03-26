@@ -1,9 +1,13 @@
 const apiUrl = 'http://localhost:3001';
+
 const routes = {
-    allTodos: '/api/todos',
+    allTodos: (filter) => {
+        return `/api/todos?filter=${filter}`;
+    },
 };
-export const getAllTodos = () => {
-    return fetch(apiUrl + routes.allTodos).then((res) => res.json());
+
+export const getAllTodos = (filter) => {
+    return fetch(apiUrl + routes.allTodos(filter)).then((res) => res.json());
 };
 
 export const completeTodo = (todo) => {
