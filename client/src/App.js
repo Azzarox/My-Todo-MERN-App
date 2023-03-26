@@ -5,11 +5,13 @@ import styles from './App.module.css';
 
 function App() {
     return (
-        <div className={styles['site-wrapper']}>
+        <>
             <NavbarComponent />
-            <h1>My Todos</h1>
-            <TodosCatalog />
-        </div>
+            <div className={styles['site-wrapper']}>
+                <h1>My Todos</h1>
+                <TodosCatalog />
+            </div>
+        </>
     );
 }
 
