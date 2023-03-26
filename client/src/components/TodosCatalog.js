@@ -8,7 +8,7 @@ import FilterTodos from './FilterTodos';
 const TodosCatalog = () => {
     const [todos, setTodos] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [filter, setFilter] = useState('Recent');
+    const [filter, setFilter] = useState('');
 
     useEffect(() => {
         setTimeout(() => {
@@ -31,7 +31,7 @@ const TodosCatalog = () => {
 
     return (
         <Stack direction="vertical" gap={3}>
-            <FilterTodos filterHandler={filterHandler} />
+            <FilterTodos filterHandler={filterHandler} filter={filter} />
             {loading ? (
                 <CustomSpinner />
             ) : (
