@@ -5,6 +5,9 @@ import CustomSpinner from './Spinner';
 import Stack from 'react-bootstrap/Stack';
 import FilterTodos from './FilterTodos';
 
+import styles from './TodosCatalog.module.css';
+import AddTodo from './AddTodo';
+
 const TodosCatalog = () => {
     const [todos, setTodos] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -30,14 +33,19 @@ const TodosCatalog = () => {
     }
 
     return (
-        <Stack direction="vertical" gap={3}>
-            <FilterTodos filterHandler={filterHandler} filter={filter} />
-            {loading ? (
-                <CustomSpinner />
-            ) : (
-                todos.map((todo) => <TodoCard todo={todo} key={todo.id} />)
-            )}
-        </Stack>
+        <>
+            <div className={styles.wrapper}>
+                <FilterTodos filterHandler={filterHandler} filter={filter} />
+                <AddTodo />
+            </div>
+            <Stack direction="vertical" gap={3}>
+                {loading ? (
+                    <CustomSpinner />
+                ) : (
+                    todos.map((todo) => <TodoCard todo={todo} key={todo.id} />)
+                )}
+            </Stack>
+        </>
     );
 };
 
