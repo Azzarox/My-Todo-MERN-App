@@ -25,6 +25,18 @@ const getAllTodos = (req, res) => {
     }
 };
 
+const getAllTodosByTitle = (req, res) => {
+    try {
+        const title = req.query.title;
+        const regex = new RegExp(title, 'i'); // Creates a regex with the querystring
+        let todos = todoServices
+            .getAllTodos()
+            .filter((todo) => regex.test(todo.title)); // Filters if todo.title passes the regex.test;
+        res.status(200).json(todos);
+    } catch (error) {
+        res.status(400).json({ message: error });
+    }
+};
 const createTodo = (req, res) => {
     const newTodo = {
         id: uniqid(),
@@ -51,8 +63,9 @@ const getOneTodo = (req, res) => {
     res.json(todo);
 };
 
-router.get('/todos', getAllTodos);
+router.get('/todos/search', getAllTodosByTitle);
 router.get('/todos/:id', getOneTodo);
+router.get('/todos', getAllTodos);
 
 router.post('/todos', createTodo);
 
