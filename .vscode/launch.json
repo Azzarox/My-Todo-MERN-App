@@ -33,7 +33,7 @@
             "name": "Debug API",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceFolder}/api/index.js",
+            "program": "${workspaceFolder}/api/src/index.js",
             "env": {
                 "NODE_ENV": "development"
             },
