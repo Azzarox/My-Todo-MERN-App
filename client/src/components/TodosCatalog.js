@@ -7,6 +7,7 @@ import FilterTodos from './FilterTodos';
 
 import styles from './TodosCatalog.module.css';
 import AddTodo from './AddTodo';
+import CreateTodo from './CreateTodo';
 
 const TodosCatalog = () => {
     const [todos, setTodos] = useState([]);
@@ -37,8 +38,10 @@ const TodosCatalog = () => {
             <div className={styles.wrapper}>
                 <FilterTodos filterHandler={filterHandler} filter={filter} />
                 <AddTodo />
+               
             </div>
             <Stack direction="vertical" gap={3}>
+            <CreateTodo/>
                 {loading ? (
                     <CustomSpinner />
                 ) : (
