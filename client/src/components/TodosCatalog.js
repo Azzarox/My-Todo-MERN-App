@@ -7,13 +7,15 @@ import FilterTodos from './FilterTodos';
 
 import styles from './TodosCatalog.module.css';
 import AddTodo from './AddTodo';
-import CreateTodo from './CreateTodo';
+import SearchTodo from './SearchTodo';
 
 const TodosCatalog = () => {
     const [todos, setTodos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState('');
+    const [title, setTitle] = useState('');
 
+    // Call when filter is changed
     useEffect(() => {
         setTimeout(() => {
             // In the api filter should be lowercase
@@ -26,6 +28,13 @@ const TodosCatalog = () => {
         }, 1000);
     }, [filter]);
 
+    // Call when title is changed
+    useEffect(() => {
+        todoServices.getAllTodosByTitle(title).then((data) => {
+            setTodos(data);
+        });
+    }, [title]);
+
     // Changes filter func
     function filterHandler(e) {
         if (e.target.tagName === 'A') {
@@ -33,15 +42,19 @@ const TodosCatalog = () => {
         }
     }
 
+    // This is passed to the SearchTodo so it can set the state
+    function titleHandler(title) {
+        setTitle(title);
+    }
+
     return (
         <>
             <div className={styles.wrapper}>
                 <FilterTodos filterHandler={filterHandler} filter={filter} />
                 <AddTodo />
-               
             </div>
             <Stack direction="vertical" gap={3}>
-            <CreateTodo/>
+                <SearchTodo titleHandler={titleHandler} />
                 {loading ? (
                     <CustomSpinner />
                 ) : (
