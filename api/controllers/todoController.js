@@ -1,11 +1,28 @@
 const uniqid = require('uniqid');
 const todoServices = require('../apiServices/todoServices');
+const compareTimestamps = require('../utils/compareTimestamps');
 
 const createTimestamp = require('../utils/createTimestamp');
 const router = require('express').Router();
 
 const getAllTodos = (req, res) => {
-    res.status(200).json(todoServices.getAllTodos());
+    try {
+        const filter = req.query.filter;
+        let todos = todoServices.getAllTodos();
+
+        // This by default will get the recent
+        todos = todos.sort((a, b) => compareTimestamps(a, b));
+
+        if (filter === 'completed') {
+            todos = todos.filter((todo) => todo.isDone);
+        } else if (filter === 'incomplete') {
+            todos = todos.filter((todo) => !todo.isDone);
+        }
+
+        res.status(200).json(todos);
+    } catch (err) {
+        res.status(400).json({ message: err });
+    }
 };
 
 const createTodo = (req, res) => {
