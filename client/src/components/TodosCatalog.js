@@ -18,7 +18,7 @@ const TodosCatalog = () => {
 
     // Call when filter is changed
     useEffect(() => {
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             // In the api filter should be lowercase
             // But from the client it is received as uppercase (Recent, Incomplete, Completed);
             // So have to make it lowerCase
@@ -27,6 +27,11 @@ const TodosCatalog = () => {
                 setLoading(false);
             });
         }, 1000);
+
+        // To avoid memory leak?
+        return () => {
+            clearTimeout(timeoutId);
+        };
     }, [filter]);
 
     // Call when title is changed
@@ -42,7 +47,6 @@ const TodosCatalog = () => {
         return () => {
             debounceHandler.cancel();
         };
-
     }, [title]);
 
     // Changes filter func
