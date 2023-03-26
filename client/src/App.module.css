@@ -50,6 +50,7 @@ h6 {
 div.site-wrapper {
     max-width: 500px;
     margin: 0 auto;
+    padding: 0 25px; /*Keeps the outside spaced when smaller screens*/
 }
 
 h1 {
