@@ -14,12 +14,12 @@ function CreateTodo() {
                     <Form
                         onSubmit={(e) => {
                             e.preventDefault();
-                            console.log(value);
+                            console.log(e.target.value);
                         }}
                     >
                         <Form.Control
                             type="text"
-                            onChange={(e) => setValue(e.target.value)}
+                            placeholder="Search for Todo by title"
                         />
                     </Form>
                 </Accordion.Body>
