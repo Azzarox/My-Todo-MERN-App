@@ -7,6 +7,7 @@ const routes = {
 };
 
 export const getAllTodos = (filter) => {
+    // This works even if filter is empty string because of the api default /api/todos
     return fetch(apiUrl + routes.allTodos(filter)).then((res) => res.json());
 };
 
