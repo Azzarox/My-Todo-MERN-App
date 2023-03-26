@@ -8,6 +8,7 @@ import FilterTodos from './FilterTodos';
 import styles from './TodosCatalog.module.css';
 import AddTodo from './AddTodo';
 import SearchTodo from './SearchTodo';
+import debounce from '../utils/debouncer';
 
 const TodosCatalog = () => {
     const [todos, setTodos] = useState([]);
@@ -30,9 +31,18 @@ const TodosCatalog = () => {
 
     // Call when title is changed
     useEffect(() => {
-        todoServices.getAllTodosByTitle(title).then((data) => {
-            setTodos(data);
-        });
+        const debounceHandler = debounce(() => {
+            todoServices.getAllTodosByTitle(title).then((data) => {
+                setTodos(data);
+            });
+        }, 500);
+
+        debounceHandler.execute();
+
+        return () => {
+            debounceHandler.cancel();
+        };
+
     }, [title]);
 
     // Changes filter func
