@@ -6,9 +6,9 @@ import Stack from 'react-bootstrap/Stack';
 import FilterTodos from './FilterTodos';
 
 import styles from './TodosCatalog.module.css';
-import AddTodo from './AddTodo';
 import SearchTodo from './SearchTodo';
 import debounce from '../utils/debouncer';
+import AddTodo from './AddTodo';
 
 const TodosCatalog = () => {
     const [todos, setTodos] = useState([]);
@@ -61,11 +61,16 @@ const TodosCatalog = () => {
         setTitle(title);
     }
 
+    // This updates the todos state from AddTodo child
+    function updateTodos(newTodo) {
+        setTodos((oldTodos) => [newTodo, ...oldTodos]);
+    }
+
     return (
         <>
             <div className={styles.wrapper}>
                 <FilterTodos filterHandler={filterHandler} filter={filter} />
-                <AddTodo />
+                <AddTodo updateTodos={updateTodos} />
             </div>
             <Stack direction="vertical" gap={3}>
                 <SearchTodo titleHandler={titleHandler} />
