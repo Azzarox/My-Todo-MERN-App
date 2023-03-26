@@ -9,25 +9,23 @@ const initialTodos = [
     },
     {
         id: 2,
-        title: 'Wash the dishes',
-        description:
-            'Wash the dishes in the sink. Do it earlier since there will be more waste',
+        title: 'Take a shower',
+        description: '',
         timestamp: '01/04/2022 11:45:59',
         isDone: true,
     },
     {
         id: 3,
-        title: 'Wash the dishes',
-        description:
-            'Wash the dishes in the sink. Do it earlier since there will be more waste',
+        title: 'Clean the living room',
+        description: 'Clean under the sofa and table',
         timestamp: '01/04/2022 15:30:00',
         isDone: false,
     },
     {
         id: 4,
-        title: 'Wash the dishes',
+        title: 'Go to the market',
         description:
-            'Wash the dishes in the sink. Do it earlier since there will be more waste',
+            'Go to the market and buy food. There is a list of ingredients at the fridge door.',
         timestamp: '04/04/2022 07:06:00',
         isDone: false,
     },
