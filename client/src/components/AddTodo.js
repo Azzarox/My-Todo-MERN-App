@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-const AddTodo = ({ updateTodos}) => {
+const AddTodo = ({ updateTodos }) => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -13,7 +13,20 @@ const AddTodo = ({ updateTodos}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:3001/api/todos', { method: 'POST' })
+        const formData = new FormData(e.target);
+        const { title, description } = Object.fromEntries(formData);
+        // console.log(title, description);
+        // The other way for getting field's values is with .get();
+        // const title = formData.get('title');
+        // const description = formData.get('description');
+
+        fetch('http://localhost:3001/api/todos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ title, description }),
+        })
             .then((res) => res.json())
             .then((newTodo) => updateTodos(newTodo));
     };
@@ -35,14 +48,23 @@ const AddTodo = ({ updateTodos}) => {
                             controlId="exampleForm.ControlInput1"
                         >
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="text" autoFocus />
+                            <Form.Control
+                                type="text"
+                                as="input"
+                                name="title"
+                                autoFocus
+                            />
                         </Form.Group>
                         <Form.Group
                             className="mb-3"
                             controlId="exampleForm.ControlTextarea1"
                         >
                             <Form.Label>Description</Form.Label>
-                            <Form.Control as="textarea" rows={3} />
+                            <Form.Control
+                                as="textarea"
+                                name="description"
+                                rows={3}
+                            />
                         </Form.Group>
                     </Modal.Body>
                     <Modal.Footer>
