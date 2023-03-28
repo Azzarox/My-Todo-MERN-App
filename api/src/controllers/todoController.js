@@ -38,17 +38,26 @@ const getAllTodosByTitle = (req, res) => {
     }
 };
 const createTodo = (req, res) => {
-    const newTodo = {
-        id: uniqid(),
-        title: 'Take a shower',
-        description: 'Take a shower or you will repulse all the girls',
-        timestamp: createTimestamp(),
-        isDone: false,
-    };
+    const { title, description } = req.body;
 
-    const todos = todoServices.getAllTodos();
-    todos.push(newTodo);
-    res.json(newTodo);
+    try {
+        const newTodo = {
+            id: uniqid(),
+            title,
+            description,
+            timestamp: createTimestamp(),
+            isDone: false,
+        };
+
+        const todos = todoServices.getAllTodos();
+        todos.push(newTodo);
+
+        res.status(201).json(newTodo);
+    } catch (err) {
+        res.status(400).json({
+            message: err,
+        });
+    }
 };
 
 const updateTodo = (req, res) => {
