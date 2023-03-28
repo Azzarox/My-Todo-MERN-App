@@ -35,6 +35,11 @@ function TodoCard({ todo, updateTodosDeleted }) {
         );
     }
 
+    const iconStyle = {
+        cursor: 'pointer',
+        fontSize: '20px',
+    };
+
     return (
         <Card>
             <Card.Header>{currentTodo.timestamp}</Card.Header>
@@ -45,8 +50,15 @@ function TodoCard({ todo, updateTodosDeleted }) {
                     <Col>{buttonComponent}</Col>
                     <Col className="text-end">
                         <i
-                            className="bi bi-trash3-fill"
+                            className="bi bi-x-lg"
+                            style={iconStyle}
                             onClick={onClickDeleteHandler}
+                            onMouseEnter={(e) =>
+                                (e.target.style.color = '#68b08f')
+                            }
+                            onMouseLeave={(e) =>
+                                (e.target.style.color = 'black')
+                            }
                         ></i>
                     </Col>
                 </Row>
