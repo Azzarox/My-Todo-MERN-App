@@ -9,7 +9,7 @@ import styles from './TodosCatalog.module.css';
 import SearchTodo from './SearchTodo';
 import debounce from '../utils/debouncer';
 import AddTodo from './AddTodo';
-import { Button } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
 
 const TodosCatalog = () => {
     const [todos, setTodos] = useState([]);
@@ -75,6 +75,18 @@ const TodosCatalog = () => {
         );
     }
 
+    let component = loading ? (
+        <CustomSpinner />
+    ) : (
+        todos.map((todo) => (
+            <TodoCard
+                updateTodosDeleted={updateTodosDeleted}
+                todo={todo}
+                key={todo.id}
+            />
+        ))
+    );
+
     return (
         <>
             <div className={styles.wrapper}>
@@ -84,18 +96,9 @@ const TodosCatalog = () => {
             <Stack direction="vertical" gap={3}>
                 <SearchTodo titleHandler={titleHandler} />
 
-                {loading ? (
-                    <CustomSpinner />
-                ) : (
-                    todos.map((todo) => (
-                        <TodoCard
-                            updateTodosDeleted={updateTodosDeleted}
-                            todo={todo}
-                            key={todo.id}
-                        />
-                    ))
-                )}
-                {filter === 'Completed' && (
+                {todos.length > 0 ? component : <Alert variant="primary">There aren't any todos yet.</Alert>}
+
+                {filter && (
                     <Button
                         variant="light"
                         onClick={() => {
