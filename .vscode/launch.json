@@ -9,7 +9,15 @@
             "request": "launch",
             "name": "React Debug",
             "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}/client/src"
+            "webRoot": "${workspaceFolder}/client/src",
+            "skipFiles": [
+                "<node_internals>/**",
+                "node_modules/**",
+                "**/react/**/*.js",
+                "**/react-dom/**/*.js",
+                "**/webpack/**/*.js",
+                "**/webpack-dev-server/**/*.js"
+            ]
         },
         // {
         //     // This debugs the api, it starts the server automatically
@@ -38,9 +46,7 @@
                 "NODE_ENV": "development"
             },
             "outputCapture": "std",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
+            "skipFiles": ["<node_internals>/**"],
             "restart": true,
             "console": "integratedTerminal",
             "sourceMaps": true
