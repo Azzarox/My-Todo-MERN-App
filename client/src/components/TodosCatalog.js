@@ -9,6 +9,7 @@ import styles from './TodosCatalog.module.css';
 import SearchTodo from './SearchTodo';
 import debounce from '../utils/debouncer';
 import AddTodo from './AddTodo';
+import { Button } from 'react-bootstrap';
 
 const TodosCatalog = () => {
     const [todos, setTodos] = useState([]);
@@ -73,7 +74,7 @@ const TodosCatalog = () => {
             oldTodos.filter((todo) => todo.id !== deletedTodo.id)
         );
     }
-    
+
     return (
         <>
             <div className={styles.wrapper}>
@@ -82,6 +83,7 @@ const TodosCatalog = () => {
             </div>
             <Stack direction="vertical" gap={3}>
                 <SearchTodo titleHandler={titleHandler} />
+
                 {loading ? (
                     <CustomSpinner />
                 ) : (
@@ -92,6 +94,16 @@ const TodosCatalog = () => {
                             key={todo.id}
                         />
                     ))
+                )}
+                {filter === 'Completed' && (
+                    <Button
+                        variant="light"
+                        onClick={() => {
+                            setTodos([]);
+                        }}
+                    >
+                        <i className="bi bi-trash"></i> Delete All
+                    </Button>
                 )}
             </Stack>
         </>
