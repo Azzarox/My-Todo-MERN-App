@@ -68,8 +68,19 @@ const updateTodo = (req, res) => {
 };
 
 const getOneTodo = (req, res) => {
-    const todo = todoServices.getTodo(req.params.id);
-    res.json(todo);
+    try {
+        const todo = todoServices.getTodo(req.params.id);
+        res.json(todo);
+    } catch (err) {
+        res.status(404).json({
+            message: 'Resource not found',
+        });
+    }
+};
+
+const deleteTodo = (req, res) => {
+    const todoToDelete = todoServices.getTodo(req.params.id);
+    res.json(todoToDelete);
 };
 
 router.get('/todos/search', getAllTodosByTitle);
@@ -79,5 +90,7 @@ router.get('/todos', getAllTodos);
 router.post('/todos', createTodo);
 
 router.put('/todos/:id', updateTodo);
+
+router.delete('/todos/:id', deleteTodo);
 
 module.exports = router;
