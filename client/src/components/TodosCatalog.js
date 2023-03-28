@@ -67,6 +67,13 @@ const TodosCatalog = () => {
         setTodos((oldTodos) => [newTodo, ...oldTodos]);
     }
 
+    // This updates the todos state from TodoCard
+    function updateTodosDeleted(deletedTodo) {
+        setTodos((oldTodos) =>
+            oldTodos.filter((todo) => todo.id !== deletedTodo.id)
+        );
+    }
+    
     return (
         <>
             <div className={styles.wrapper}>
@@ -78,7 +85,13 @@ const TodosCatalog = () => {
                 {loading ? (
                     <CustomSpinner />
                 ) : (
-                    todos.map((todo) => <TodoCard todo={todo} key={todo.id} />)
+                    todos.map((todo) => (
+                        <TodoCard
+                            updateTodosDeleted={updateTodosDeleted}
+                            todo={todo}
+                            key={todo.id}
+                        />
+                    ))
                 )}
             </Stack>
         </>
