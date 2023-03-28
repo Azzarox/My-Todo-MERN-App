@@ -2,16 +2,23 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import * as todoServices from '../services/todoServices';
+import { Row, Col } from 'react-bootstrap';
 
-function TodoCard({ todo }) {
+function TodoCard({ todo, updateTodosDeleted }) {
     // If not using state, it will not rerender (only after refresh which is not what we want)
     const [currentTodo, setCurrentTodo] = useState(todo);
 
     let buttonComponent = null;
     const onClickHandler = (e) => {
-        todoServices.completeTodo(currentTodo).then((newTodo) => {
+        todoServices.completeTodo(currentTodo.id).then((newTodo) => {
             setCurrentTodo(newTodo);
         });
+    };
+
+    const onClickDeleteHandler = (e) => {
+        todoServices
+            .deleteTodo(currentTodo.id)
+            .then((deletedTodo) => updateTodosDeleted(deletedTodo));
     };
 
     if (currentTodo.isDone) {
@@ -34,7 +41,15 @@ function TodoCard({ todo }) {
             <Card.Body>
                 <Card.Title>{currentTodo.title}</Card.Title>
                 <Card.Text>{currentTodo.description}</Card.Text>
-                {buttonComponent}
+                <Row className="justify-content-between">
+                    <Col>{buttonComponent}</Col>
+                    <Col className="text-end">
+                        <i
+                            className="bi bi-trash3-fill"
+                            onClick={onClickDeleteHandler}
+                        ></i>
+                    </Col>
+                </Row>
             </Card.Body>
         </Card>
     );
