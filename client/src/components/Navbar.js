@@ -1,65 +1,44 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function NavbarComponent() {
-    let user = null || null; // Dummy for conditional rendering
+    let user = null ; // Dummy for conditional rendering
 
     return (
         <>
-            {[false].map((expand) => (
-                <Navbar
-                    key={expand}
-                    bg="light"
-                    expand={expand}
-                    className="mb-3"
-                >
-                    <Container fluid>
-                        <Navbar.Brand href="/">Todo's </Navbar.Brand>
-                        <Navbar.Toggle
-                            aria-controls={`offcanvasNavbar-expand-${expand}`}
-                        />
-                        <Navbar.Offcanvas
-                            id={`offcanvasNavbar-expand-${expand}`}
-                            aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-                            placement="end"
-                        >
-                            <Offcanvas.Header closeButton>
-                                <Offcanvas.Title
-                                    id={`offcanvasNavbarLabel-expand-${expand}`}
-                                >
-                                    Menu
-                                </Offcanvas.Title>
-                            </Offcanvas.Header>
-                            <Offcanvas.Body>
-                                <Nav className="justify-content-end flex-grow-1 pe-3">
-                                    {!user ? (
-                                        <>
-                                            <Nav.Link as={NavLink} to="/login">
-                                                Login
-                                            </Nav.Link>
-                                            <Nav.Link as={NavLink} to="/register">
-                                                Register
-                                            </Nav.Link>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Nav.Link href="/profile">
-                                                Profile
-                                            </Nav.Link>
-                                            <Nav.Link href="/logout">
-                                                Log out
-                                            </Nav.Link>
-                                        </>
-                                    )}
-                                </Nav>
-                            </Offcanvas.Body>
-                        </Navbar.Offcanvas>
-                    </Container>
+            <Container fluid>
+                <Navbar>
+                    <Navbar.Brand as={Link} to="/">
+                        Todo's
+                    </Navbar.Brand>
+                    <Navbar.Toggle />
+                    <Navbar.Collapse className="justify-content-end">
+                        <Nav className="">
+                            {user ? (
+                                <>
+                                    <Nav.Link as={Link} to="/profile">
+                                        Profile
+                                    </Nav.Link>
+                                    <Nav.Link as={Link} to="/logout">
+                                        Logout
+                                    </Nav.Link>
+                                </>
+                            ) : (
+                                <>
+                                    <Nav.Link as={Link} to="/login">
+                                        Login
+                                    </Nav.Link>
+                                    <Nav.Link as={Link} to="/register">
+                                        Register
+                                    </Nav.Link>
+                                </>
+                            )}
+                        </Nav>
+                    </Navbar.Collapse>
                 </Navbar>
-            ))}
+            </Container>
         </>
     );
 }
