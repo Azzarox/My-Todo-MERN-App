@@ -37,7 +37,7 @@ function NavbarComponent() {
                                 <Nav className="justify-content-end flex-grow-1 pe-3">
                                     {!user ? (
                                         <>
-                                            <Nav.Link as={NavLink} gsto="/login">
+                                            <Nav.Link as={NavLink} to="/login">
                                                 Login
                                             </Nav.Link>
                                             <Nav.Link as={NavLink} to="/register">
