@@ -96,8 +96,13 @@ const TodosCatalog = () => {
             <Stack direction="vertical" gap={3}>
                 <SearchTodo titleHandler={titleHandler} />
 
-                {todos.length > 0 ? component : <Alert variant="primary">There aren't any todos yet.</Alert>}
+                {todos.length > 0 ? (
+                    component
+                ) : (
+                    <Alert variant="primary">There aren't any todos yet.</Alert>
+                )}
 
+                {/* When first loads the page there is no filter so delete all doesn't show up */}
                 {filter && (
                     <Button
                         variant="light"
