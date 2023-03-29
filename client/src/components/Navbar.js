@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { NavLink } from 'react-router-dom';
 
 function NavbarComponent() {
     let user = null || null; // Dummy for conditional rendering
@@ -36,10 +37,10 @@ function NavbarComponent() {
                                 <Nav className="justify-content-end flex-grow-1 pe-3">
                                     {!user ? (
                                         <>
-                                            <Nav.Link href="/login">
+                                            <Nav.Link as={NavLink} gsto="/login">
                                                 Login
                                             </Nav.Link>
-                                            <Nav.Link href="/register">
+                                            <Nav.Link as={NavLink} to="/register">
                                                 Register
                                             </Nav.Link>
                                         </>
