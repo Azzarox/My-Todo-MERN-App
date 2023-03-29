@@ -10,6 +10,7 @@ import Register from './components/Register';
 function App() {
     return (
         <>
+        
             <NavbarComponent />
 
             <Routes>
