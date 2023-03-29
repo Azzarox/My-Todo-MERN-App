@@ -16,7 +16,7 @@ function NavbarComponent() {
                     className="mb-3"
                 >
                     <Container fluid>
-                        <Navbar.Brand href="#">Todo's </Navbar.Brand>
+                        <Navbar.Brand href="/">Todo's </Navbar.Brand>
                         <Navbar.Toggle
                             aria-controls={`offcanvasNavbar-expand-${expand}`}
                         />
@@ -36,19 +36,19 @@ function NavbarComponent() {
                                 <Nav className="justify-content-end flex-grow-1 pe-3">
                                     {!user ? (
                                         <>
-                                            <Nav.Link href="#action1">
+                                            <Nav.Link href="/login">
                                                 Login
                                             </Nav.Link>
-                                            <Nav.Link href="#action1">
+                                            <Nav.Link href="/register">
                                                 Register
                                             </Nav.Link>
                                         </>
                                     ) : (
                                         <>
-                                            <Nav.Link href="#action1">
+                                            <Nav.Link href="/profile">
                                                 Profile
                                             </Nav.Link>
-                                            <Nav.Link href="#action1">
+                                            <Nav.Link href="/logout">
                                                 Log out
                                             </Nav.Link>
                                         </>
