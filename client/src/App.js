@@ -1,16 +1,22 @@
-import NavbarComponent from './components/Navbar';
-import TodosCatalog from './components/TodosCatalog';
+import { Routes, Route } from 'react-router-dom';
 
-import styles from './App.module.css';
+import Homepage from './components/Homepage';
+import Login from './components/Login';
+import NavbarComponent from './components/Navbar';
+
+import './App.css';
+import Register from './components/Register';
 
 function App() {
     return (
         <>
             <NavbarComponent />
-            <div className={styles['site-wrapper']}>
-                <h1>My Todos</h1>
-                <TodosCatalog />
-            </div>
+
+            <Routes>
+                <Route path="/" element={<Homepage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+            </Routes>
         </>
     );
 }
