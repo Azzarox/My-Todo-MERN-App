@@ -1,9 +1,14 @@
-const uniqid = require('uniqid');
-const todoServices = require('../apiServices/todoServices');
-const compareTimestamps = require('../utils/compareTimestamps');
-
-const createTimestamp = require('../utils/createTimestamp');
 const router = require('express').Router();
+
+const uniqid = require('uniqid');
+
+const compareTimestamps = require('../utils/compareTimestamps');
+const createTimestamp = require('../utils/createTimestamp');
+
+const todoServices = require('../apiServices/todoServices');
+
+const Todo = require('../models/Todo');
+
 
 const getAllTodos = (req, res) => {
     try {
@@ -37,10 +42,13 @@ const getAllTodosByTitle = (req, res) => {
         res.status(400).json({ message: error });
     }
 };
-const createTodo = (req, res) => {
+const createTodo = async (req, res) => {
     const { title, description } = req.body;
 
     try {
+        // const todo = new Todo({ title, description });
+        // await todo.save(); // Creates Todo document
+
         const newTodo = {
             id: uniqid(),
             title,
