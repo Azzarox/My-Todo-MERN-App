@@ -1,7 +1,7 @@
 {
     "development": {
         "PORT": 3001,
-        "DATABASE_URL": "mongodb+srv://azzarox:kDaQ8rYaqsx33IUk@todos-mern.0yrm3rc.mongodb.net/?retryWrites=true&w=majority"
+        "DATABASE_URL": "mongodb+srv://azzarox:7Je4OyDTr5L3tF16@mern-todos.ma1oifw.mongodb.net/?retryWrites=true&w=majority"
     },
     "production": {
         "PORT": 5000
