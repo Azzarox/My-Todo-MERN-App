@@ -1,8 +1,13 @@
 const router = require('express').Router();
 const authServices = require('../apiServices/authServices');
+const emptyFieldsExist = require('../validators/emptyFields');
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
+
+    if (emptyFieldsExist(username, password)) {
+        return res.status(400).json({ err: 'No empty fields allowed!' });
+    }
 
     try {
         const token = await authServices.login(username, password);
@@ -14,6 +19,10 @@ router.post('/login', async (req, res) => {
 
 router.post('/register', async (req, res) => {
     const { username, password, repass } = req.body;
+
+    if (emptyFieldsExist(username, password, repass)) {
+        return res.status(400).json({ err: 'No empty fields allowed!' });
+    }
 
     try {
         if (password !== repass) {
