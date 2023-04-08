@@ -6,18 +6,36 @@ import NavbarComponent from './components/Navbar';
 
 import './App.css';
 import Register from './components/Register';
+import { AuthContext } from './context/authContext';
+import { useState } from 'react';
 
 function App() {
+    const [user, setUser] = useState({
+        id: '',
+        username: '',
+    });
+
+    const [token, setToken] = useState(null);
+
+    const onRegister = (data) => {
+        setUser(data);
+    };
+
+    const onLogin = (data) => {
+        setToken(data)
+    }
+
     return (
         <>
-        
-            <NavbarComponent />
+            <AuthContext.Provider value={{ user, onRegister, onLogin }}>
+                <NavbarComponent />
 
-            <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-            </Routes>
+                <Routes>
+                    <Route path="/" element={<Homepage />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                </Routes>
+            </AuthContext.Provider>
         </>
     );
 }
