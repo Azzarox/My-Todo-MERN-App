@@ -1,11 +1,13 @@
+import { useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/authContext';
 
 function NavbarComponent() {
-    let user = null ; // Dummy for conditional rendering
-
+    const { user, token } = useContext(AuthContext);
+    
     return (
         <>
             <Container fluid>
@@ -16,7 +18,7 @@ function NavbarComponent() {
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                         <Nav className="">
-                            {user ? (
+                            {token ? (
                                 <>
                                     <Nav.Link as={Link} to="/profile">
                                         Profile
