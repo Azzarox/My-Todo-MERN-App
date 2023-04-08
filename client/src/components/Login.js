@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 import * as authServices from '../services/authServices';
 import { Alert } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/authContext';
 
 function Login() {
-    const [token, setToken] = useState(null);
     const [err, setErr] = useState(null);
+    const { onLogin } = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     async function onSubmitLogin(ev) {
         ev.preventDefault();
@@ -19,14 +23,16 @@ function Login() {
         });
 
         if (data.token) {
-            setToken(data);
+            onLogin(data);
+            navigate('/');
         } else {
             setErr(data);
         }
+
+        localStorage.setItem('token', JSON.stringify(data.token));
     }
 
     // Setting to localStorage
-    localStorage.setItem('token', JSON.stringify(token?.token));
 
     return (
         <Form onSubmit={onSubmitLogin} className="wrapper">

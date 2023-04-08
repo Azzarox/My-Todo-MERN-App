@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import * as authServices from '../services/authServices';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 import { Alert } from 'react-bootstrap';
+import { AuthContext } from '../context/authContext';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Register = () => {
-    const [user, setUser] = useState(null);
+    const { onRegister, user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    
     const [error, setError] = useState(null);
 
     async function onSubmitRegister(ev) {
@@ -22,7 +26,8 @@ const Register = () => {
         });
 
         if (data.id) {
-            setUser(data);
+            onRegister(data);
+            navigate('/login');
         } else {
             setError(data);
         }
