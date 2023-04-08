@@ -32,7 +32,6 @@ function Login() {
         localStorage.setItem('token', JSON.stringify(data.token));
     }
 
-    // Setting to localStorage
 
     return (
         <Form onSubmit={onSubmitLogin} className="wrapper">
