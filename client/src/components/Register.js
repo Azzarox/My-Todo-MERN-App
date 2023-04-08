@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import * as authServices from '../services/authServices';
+
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Alert, Col, Row } from 'react-bootstrap';
+
+import { Alert } from 'react-bootstrap';
 
 const Register = () => {
     const [user, setUser] = useState(null);
