@@ -6,12 +6,12 @@ import Form from 'react-bootstrap/Form';
 
 import { Alert } from 'react-bootstrap';
 import { AuthContext } from '../context/authContext';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const { onRegister, user } = useContext(AuthContext);
     const navigate = useNavigate();
-    
+
     const [error, setError] = useState(null);
 
     async function onSubmitRegister(ev) {
