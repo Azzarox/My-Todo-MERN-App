@@ -45,3 +45,5 @@ h6 {
 #__next {
     isolation: isolate;
 }
+
+@import 'Global.css';
