@@ -7,7 +7,8 @@ import NavbarComponent from './components/Navbar';
 import './App.css';
 import Register from './components/Register';
 import { AuthContext } from './context/authContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Logout from './components/Logout';
 
 function App() {
     const [user, setUser] = useState({
@@ -15,25 +16,38 @@ function App() {
         username: '',
     });
 
-    const [token, setToken] = useState(null);
+    let [token, setToken] = useState(null);
+
+    // Fixing the resetting the token on refresh page?
+    useEffect(() => {
+        setToken(localStorage.getItem('token'));
+    }, []);
 
     const onRegister = (data) => {
         setUser(data);
     };
 
     const onLogin = (data) => {
-        setToken(data)
-    }
+        setToken(data);
+    };
+    const onLogout = () => {
+        setToken(null);
+    };
+
+    console.log(token);
 
     return (
         <>
-            <AuthContext.Provider value={{ user, onRegister, onLogin }}>
+            <AuthContext.Provider
+                value={{ token, user, onRegister, onLogin, onLogout }}
+            >
                 <NavbarComponent />
 
                 <Routes>
                     <Route path="/" element={<Homepage />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/logout" element={<Logout />} />
                 </Routes>
             </AuthContext.Provider>
         </>
