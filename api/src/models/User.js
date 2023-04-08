@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -10,6 +10,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+});
+
+// Made so " asdasd  " is "asdasd";
+userSchema.pre('save', function (next) {
+    this.username = this.username.trim();
+    next();
 });
 
 userSchema.pre('save', function (next) {
