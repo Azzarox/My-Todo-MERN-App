@@ -82,7 +82,7 @@ const TodosCatalog = () => {
             <TodoCard
                 updateTodosDeleted={updateTodosDeleted}
                 todo={todo}
-                key={todo.id}
+                key={todo._id}
             />
         ))
     );
