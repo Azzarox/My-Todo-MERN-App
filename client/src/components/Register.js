@@ -32,8 +32,7 @@ const Register = () => {
             setError(data);
         }
 
-        console.log(user);
-        console.log(error);
+       
     }
 
     return (

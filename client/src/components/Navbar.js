@@ -7,7 +7,6 @@ import { AuthContext } from '../context/authContext';
 
 function NavbarComponent() {
     const { user, token } = useContext(AuthContext);
-    console.log(user);
     return (
         <>
             <Container fluid>

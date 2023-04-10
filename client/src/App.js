@@ -34,8 +34,6 @@ function App() {
         setToken(null);
     };
 
-    console.log(token);
-
     return (
         <>
             <AuthContext.Provider
