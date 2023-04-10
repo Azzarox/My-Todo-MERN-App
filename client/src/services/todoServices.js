@@ -27,10 +27,20 @@ export const getAllTodos = async (filter) => {
     return response.json();
 };
 
-export const getAllTodosByTitle = (title) => {
-    return fetch(apiUrl + routes.allTodosByTitle(title)).then((res) =>
-        res.json()
-    );
+export const getAllTodosByTitle = async (title) => {
+    const token = JSON.parse(localStorage.getItem('token'));
+
+    const response = await fetch(apiUrl + routes.allTodosByTitle(title), {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+
+    return response.json();
 };
 export const completeTodo = (id) => {
     return fetch(`http://localhost:3001/api/todos/${id}`, {
