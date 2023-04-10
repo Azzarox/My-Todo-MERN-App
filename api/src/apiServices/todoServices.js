@@ -1,28 +1,28 @@
 const initialTodos = require('../data/data');
 const Todo = require('../models/Todo');
 
-const getAllTodos = () => {
-    return initialTodos;
-};
+// const getAllTodos = () => {
+//     return initialTodos;
+// };
 
 const getTodo = (id) => {
     return initialTodos.find((todo) => todo.id == id);
 };
 
+const getTodosByRecentWithFilter = (filter) => {
+    if (!filter) {
+        return Todo.find().sort({ createdAt: -1 });
+    } else if (filter === 'completed') {
+        return Todo.find({ isDone: true }).sort({ createdAt: -1 });
+    } else {
+        return Todo.find({ isDone: false }).sort({ createdAt: -1 });
+    }
+};
+
 const todoServices = {
-    getAllTodos,
+    getTodosByRecentWithFilter,
     getTodo,
 };
-
-const db_getAll = () => {
-    return Todo.findOne(); // Returns promise
-};
-
-const db_getOne = (id) => {
-    return Todo.findById(id)
-}
-
-
 // db_getAll()
 //     .then((docs) => console.log(docs))
 //     .catch((err) => console.log(err));
