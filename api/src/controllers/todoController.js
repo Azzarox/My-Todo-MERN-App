@@ -13,8 +13,7 @@ const Todo = require('../models/Todo');
 const getAllTodos = async (req, res) => {
     try {
         const filter = req.query.filter;
-
-        let todos = await todoServices.getTodosByRecentWithFilter(filter);
+        let todos = await todoServices.getTodosByRecentWithFilter(req.user.id, filter);
         res.status(200).json(todos);
     } catch (err) {
         res.status(400).json({ message: err });
@@ -24,7 +23,7 @@ const getAllTodos = async (req, res) => {
 const getAllTodosByTitle = async (req, res) => {
     try {
         const title = req.query.title;
-        let todos = await todoServices.getTodosByQuery(title)
+        let todos = await todoServices.getTodosByQuery(req.user.id, title)
         res.status(200).json(todos);
     } catch (error) {
         res.status(400).json({ message: error });
