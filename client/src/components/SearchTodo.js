@@ -2,9 +2,11 @@ import Form from 'react-bootstrap/Form';
 import Accordion from 'react-bootstrap/Accordion';
 import { useState } from 'react';
 
+
 // Using controlled form
 function SearchTodo({ titleHandler }) {
     const [value, setValue] = useState('');
+
     return (
         <Accordion defaultActiveKey="1">
             <Accordion.Item eventKey="0">
@@ -21,7 +23,11 @@ function SearchTodo({ titleHandler }) {
                             placeholder="Search for Todo by title"
                             onChange={(e) => {
                                 setValue(e.target.value);
-                                titleHandler(value);
+                                if (e.target.value === '') {
+                                    titleHandler('');
+                                } else {
+                                    titleHandler(value);
+                                }
                                 // If I add titleHandler(value) here
                                 // It will call the api on each keystroke
                             }}
