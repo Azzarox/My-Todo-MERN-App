@@ -19,9 +19,15 @@ const getTodosByRecentWithFilter = (filter) => {
     }
 };
 
+const getTodosByQuery = (query) => {
+    const regex = new RegExp(query, 'i'); // create regex for case-insensitive search
+    return Todo.find({ title: { $regex: regex } }).sort({ createdAt: -1 });
+};
+
 const todoServices = {
     getTodosByRecentWithFilter,
     getTodo,
+    getTodosByQuery,
 };
 // db_getAll()
 //     .then((docs) => console.log(docs))
