@@ -40,9 +40,11 @@ function TodoCard({ todo, updateTodosDeleted }) {
         fontSize: '20px',
     };
 
+    const todoTimestamp = new Date(todo.createdAt).toLocaleString();
+
     return (
         <Card>
-            <Card.Header>{currentTodo.timestamp}</Card.Header>
+            <Card.Header>{todoTimestamp}</Card.Header>
             <Card.Body>
                 <Card.Title>{currentTodo.title}</Card.Title>
                 <Card.Text>{currentTodo.description}</Card.Text>
