@@ -36,18 +36,9 @@ const createTodo = async (req, res) => {
 
     try {
         const todo = new Todo({ title, description });
-        await todo.save(); // Creates Todo document
+        todo.author = req.user.id;
 
-        // const newTodo = {
-        //     id: uniqid(),
-        //     title,
-        //     description,
-        //     timestamp: createTimestamp(),
-        //     isDone: false,
-        // };
-
-        // const todos = todoServices.getAllTodos();
-        // todos.push(newTodo);
+        await todo.save();
 
         res.status(201).json(todo);
     } catch (err) {
