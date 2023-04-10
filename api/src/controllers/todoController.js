@@ -9,6 +9,7 @@ const todoServices = require('../apiServices/todoServices');
 
 const Todo = require('../models/Todo');
 
+
 const getAllTodos = async (req, res) => {
     try {
         const filter = req.query.filter;
@@ -79,14 +80,14 @@ const deleteTodo = (req, res) => {
     res.json(todoToDelete);
 };
 
-router.get('/todos/search', getAllTodosByTitle);
-router.get('/todos/:id', getOneTodo);
-router.get('/todos', getAllTodos);
+router.get('/search', getAllTodosByTitle);
+router.get('/:id', getOneTodo);
+router.get('/',  getAllTodos);
 
-router.post('/todos', createTodo);
+router.post('/', createTodo);
 
-router.put('/todos/:id', updateTodo);
+router.put('/:id', updateTodo);
 
-router.delete('/todos/:id', deleteTodo);
+router.delete('/:id', deleteTodo);
 
 module.exports = router;
