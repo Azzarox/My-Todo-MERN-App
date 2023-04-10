@@ -20,18 +20,16 @@ const getAllTodos = async (req, res) => {
     }
 };
 
-const getAllTodosByTitle = (req, res) => {
+const getAllTodosByTitle = async (req, res) => {
     try {
         const title = req.query.title;
-        const regex = new RegExp(title, 'i'); // Creates a regex with the querystring
-        let todos = todoServices
-            .getAllTodos()
-            .filter((todo) => regex.test(todo.title)); // Filters if todo.title passes the regex.test;
+        let todos = await todoServices.getTodosByQuery(title)
         res.status(200).json(todos);
     } catch (error) {
         res.status(400).json({ message: error });
     }
 };
+
 const createTodo = async (req, res) => {
     const { title, description } = req.body;
 
