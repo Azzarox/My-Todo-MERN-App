@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const jwt = require('../utils/jwt');
+const { JWT_SECRET } = require('../../constants');
 
 const register = async (username, password) => {
     const existingUser = await User.findOne({ username });
@@ -24,7 +25,7 @@ const login = async (username, password) => {
     }
 
     const payload = { id: user._id, username: user.username };
-    const token = await jwt.sign(payload, 'ASDSADSAD');
+    const token = await jwt.sign(payload, JWT_SECRET);
 
     return token;
 };
