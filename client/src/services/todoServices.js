@@ -42,6 +42,25 @@ export const getAllTodosByTitle = async (title) => {
 
     return response.json();
 };
+
+export const createTodo = async (data) => {
+    const token = JSON.parse(localStorage.getItem('token'));
+    const response = await fetch('http://localhost:3001/api/todos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+
+    return response.json();
+};
+
 export const completeTodo = (id) => {
     return fetch(`http://localhost:3001/api/todos/${id}`, {
         method: 'PUT',

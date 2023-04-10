@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-
+import * as todoServices from '../services/todoServices';
 const AddTodo = ({ updateTodos }) => {
     const [show, setShow] = useState(false);
 
@@ -15,20 +15,13 @@ const AddTodo = ({ updateTodos }) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const { title, description } = Object.fromEntries(formData);
-        // console.log(title, description);
-        // The other way for getting field's values is with .get();
-        // const title = formData.get('title');
-        // const description = formData.get('description');
 
-        fetch('http://localhost:3001/api/todos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ title, description }),
-        })
-            .then((res) => res.json())
-            .then((newTodo) => updateTodos(newTodo));
+        todoServices
+            .createTodo({ title, description })
+            .then((newTodo) => updateTodos(newTodo))
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     return (
