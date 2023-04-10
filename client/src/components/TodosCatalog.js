@@ -7,53 +7,16 @@ import FilterTodos from './FilterTodos';
 
 import styles from './TodosCatalog.module.css';
 import SearchTodo from './SearchTodo';
-import debounce from '../utils/debouncer';
 import AddTodo from './AddTodo';
 import { Alert, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import useSearchDebouncer from '../hooks/useSearchDebouncer';
+import useFilter from '../hooks/useFilter';
+
 const TodosCatalog = () => {
-    const [todos, setTodos] = useState([]);
-    const [loading, setLoading] = useState('');
-    const [filter, setFilter] = useState('');
-    const [title, setTitle] = useState('');
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        setLoading(true);
-        const timeoutId = setTimeout(() => {
-            todoServices
-                .getAllTodos(filter.toLowerCase())
-                .then((data) => {
-                    // This will be executed only if there is no error
-                    setTodos(data);
-                    setLoading(false);
-                })
-                .catch(
-                    // if there is error navigate to the login page
-                    (err) => navigate('/login')
-                );
-        }, 1000);
-
-        // To avoid memory leak?
-        return () => {
-            clearTimeout(timeoutId);
-        };
-    }, [filter]);
+    const { loading, todos, filter, err, setFilter, setTodos } = useFilter();
+    const [_, setTitle] = useSearchDebouncer(setSearchTodos);
 
     // Call when title is changed
-    useEffect(() => {
-        const debounceHandler = debounce(() => {
-            todoServices.getAllTodosByTitle(title).then((data) => {
-                setTodos(data);
-            });
-        }, 500);
-
-        debounceHandler.execute();
-
-        return () => {
-            debounceHandler.cancel();
-        };
-    }, [title]);
 
     // Changes filter func
     function filterHandler(e) {
@@ -62,6 +25,9 @@ const TodosCatalog = () => {
         }
     }
 
+    function setSearchTodos(todos) {
+        setTodos(todos);
+    }
     // This is passed to the SearchTodo so it can set the state
     function titleHandler(title) {
         setTitle(title);
