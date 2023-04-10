@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import * as todoServices from '../services/todoServices';
+import { useNavigate } from 'react-router-dom';
 
 const useFilter = () => {
     const [err, setErrors] = useState(null);
     const [todos, setTodos] = useState([]);
     const [loading, setLoading] = useState('');
     const [filter, setFilter] = useState('');
-
+    const navigate = useNavigate();
+    
     // Call when filter is changed
     useEffect(() => {
         setLoading(true);
@@ -20,7 +22,10 @@ const useFilter = () => {
                     setTodos(data);
                     setLoading(false);
                 })
-                .catch((err) => setErrors(err));
+                .catch((err) => {
+                    setErrors(err.message);
+                    navigate('/login');
+                });
         }, 1000);
 
         // To avoid memory leak?
