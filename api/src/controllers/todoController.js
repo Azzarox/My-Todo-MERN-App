@@ -9,21 +9,11 @@ const todoServices = require('../apiServices/todoServices');
 
 const Todo = require('../models/Todo');
 
-
-const getAllTodos = (req, res) => {
+const getAllTodos = async (req, res) => {
     try {
         const filter = req.query.filter;
-        let todos = todoServices.getAllTodos();
 
-        // This by default will get the recent
-        todos = todos.sort((a, b) => compareTimestamps(a, b));
-
-        if (filter === 'completed') {
-            todos = todos.filter((todo) => todo.isDone);
-        } else if (filter === 'incomplete') {
-            todos = todos.filter((todo) => !todo.isDone);
-        }
-
+        let todos = await todoServices.getTodosByRecentWithFilter(filter);
         res.status(200).json(todos);
     } catch (err) {
         res.status(400).json({ message: err });
@@ -46,21 +36,21 @@ const createTodo = async (req, res) => {
     const { title, description } = req.body;
 
     try {
-        // const todo = new Todo({ title, description });
-        // await todo.save(); // Creates Todo document
+        const todo = new Todo({ title, description });
+        await todo.save(); // Creates Todo document
 
-        const newTodo = {
-            id: uniqid(),
-            title,
-            description,
-            timestamp: createTimestamp(),
-            isDone: false,
-        };
+        // const newTodo = {
+        //     id: uniqid(),
+        //     title,
+        //     description,
+        //     timestamp: createTimestamp(),
+        //     isDone: false,
+        // };
 
-        const todos = todoServices.getAllTodos();
-        todos.push(newTodo);
+        // const todos = todoServices.getAllTodos();
+        // todos.push(newTodo);
 
-        res.status(201).json(newTodo);
+        res.status(201).json(todo);
     } catch (err) {
         res.status(400).json({
             message: err,
