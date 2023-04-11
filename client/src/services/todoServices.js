@@ -1,3 +1,5 @@
+import request from './requester';
+
 const apiUrl = 'http://localhost:3001';
 
 const routes = {
@@ -10,55 +12,32 @@ const routes = {
 };
 
 export const getAllTodos = async (filter) => {
-    const token = JSON.parse(localStorage.getItem('token'));
-
-    const response = await fetch(apiUrl + routes.allTodos(filter), {
-        headers: {
-            Authorization: 'Bearer ' + token,
-        },
-    });
-
-    // The response will be unauthorized so we throw the error back to be caught in the useEffect in TodoCatalog
-
-    if (!response.ok) {
-        throw new Error(response.statusText);
+    try {
+        const response = await request('GET', routes.allTodos(filter));
+        return response;
+    } catch (err) {
+        throw err;
     }
-    // If the response is ok we get the data
-    return response.json();
 };
 
 export const getAllTodosByTitle = async (title) => {
-    const token = JSON.parse(localStorage.getItem('token'));
-
-    const response = await fetch(apiUrl + routes.allTodosByTitle(title), {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
-
-    if (!response.ok) {
-        throw new Error(response.statusText);
+    try {
+        // If there was a error thrown from request it would be caught in the catch
+        const response = await request('GET', routes.allTodos(title));
+        return response;
+    } catch (err) {
+        throw err;
+        // Caught and thrown to be caught in the useEffect hook
     }
-
-    return response.json();
 };
 
 export const createTodo = async (data) => {
-    const token = JSON.parse(localStorage.getItem('token'));
-    const response = await fetch('http://localhost:3001/api/todos', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-        throw new Error(response.statusText);
+    try {
+        const response = await request('POST', '/api/todos', data);
+        return response;
+    } catch (err) {
+        throw err;
     }
-
-    return response.json();
 };
 
 export const completeTodo = (id) => {
