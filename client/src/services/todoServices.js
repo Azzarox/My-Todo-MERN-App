@@ -51,8 +51,11 @@ export const completeTodo = async (id) => {
     }
 };
 
-export const deleteTodo = (id) => {
-    return fetch(`http://localhost:3001/api/todos/${id}`, {
-        method: 'DELETE',
-    }).then((res) => res.json());
+export const deleteTodo = async (id) => {
+    try {
+        const response = await request('DELETE', `/api/todos/${id}`, {});
+        return response;
+    } catch (err) {
+        console.log(err);
+    }
 };
