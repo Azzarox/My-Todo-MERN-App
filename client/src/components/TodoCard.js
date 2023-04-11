@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import * as todoServices from '../services/todoServices';
 import { Row, Col } from 'react-bootstrap';
 
-function TodoCard({ todo, updateTodosDeleted, updateTodo }) {
+function TodoCard({ todo, updateTodosDeleted }) {
     // If not using state, it will not rerender (only after refresh which is not what we want)
     const [currentTodo, setCurrentTodo] = useState(todo);
 
@@ -17,9 +17,9 @@ function TodoCard({ todo, updateTodosDeleted, updateTodo }) {
     };
 
     const onClickDeleteHandler = (e) => {
-        todoServices
-            .deleteTodo(currentTodo.id)
-            .then((deletedTodo) => updateTodosDeleted(deletedTodo));
+        todoServices.deleteTodo(currentTodo._id).then((deletedTodo) => {
+            updateTodosDeleted(deletedTodo);
+        });
     };
 
     if (currentTodo.isDone) {

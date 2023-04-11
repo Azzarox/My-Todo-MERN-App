@@ -39,7 +39,7 @@ const TodosCatalog = () => {
     // This updates the todos state from TodoCard
     function updateTodosDeleted(deletedTodo) {
         setTodos((oldTodos) =>
-            oldTodos.filter((todo) => todo.id !== deletedTodo.id)
+            oldTodos.filter((todo) => todo._id !== deletedTodo._id)
         );
     }
 
