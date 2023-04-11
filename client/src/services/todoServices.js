@@ -23,7 +23,7 @@ export const getAllTodos = async (filter) => {
 export const getAllTodosByTitle = async (title) => {
     try {
         // If there was a error thrown from request it would be caught in the catch
-        const response = await request('GET', routes.allTodos(title));
+        const response = await request('GET', routes.allTodosByTitle(title));
         return response;
     } catch (err) {
         throw err;
