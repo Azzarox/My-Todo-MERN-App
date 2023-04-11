@@ -51,10 +51,8 @@ const createTodo = async (req, res) => {
 
 const updateTodo = async (req, res) => {
     try {
-        
-
-        // On the first request returns the old todo in db 
-        // So it needs new true 
+        // On the first request returns the old todo in db
+        // So it needs new true
         const todo = await Todo.findByIdAndUpdate(
             req.params.id,
             {
@@ -83,9 +81,13 @@ const getOneTodo = (req, res) => {
     }
 };
 
-const deleteTodo = (req, res) => {
-    const todoToDelete = todoServices.getTodo(req.params.id);
-    res.json(todoToDelete);
+const deleteTodo = async (req, res) => {
+    try {
+        const todo = await Todo.findByIdAndDelete(req.params.id);
+        res.status(200).json(todo);
+    } catch (err) {
+        res.status(400).json({ err: err.message });
+    }
 };
 
 router.get('/search', getAllTodosByTitle);
