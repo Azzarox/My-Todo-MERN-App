@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
 import TodoCard from './TodoCard';
-import * as todoServices from '../services/todoServices';
 import CustomSpinner from './Spinner';
 import Stack from 'react-bootstrap/Stack';
 import FilterTodos from './FilterTodos';
