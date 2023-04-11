@@ -40,10 +40,15 @@ export const createTodo = async (data) => {
     }
 };
 
-export const completeTodo = (id) => {
-    return fetch(`http://localhost:3001/api/todos/${id}`, {
-        method: 'PUT',
-    }).then((res) => res.json());
+export const completeTodo = async (id) => {
+    try {
+        const response = await request('PUT', `/api/todos/${id}`, {
+            isDone: true,
+        });
+        return response;
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 export const deleteTodo = (id) => {
