@@ -1,4 +1,4 @@
-import styles from './AddTodo.module.css';
+import styles from './AddTodo.module.scss';
 
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';

@@ -4,6 +4,8 @@ import Card from 'react-bootstrap/Card';
 import * as todoServices from '../services/todoServices';
 import { Row, Col } from 'react-bootstrap';
 
+import './TodoCard.scss';
+
 function TodoCard({ todo, updateTodosDeleted }) {
     // If not using state, it will not rerender (only after refresh which is not what we want)
     const [currentTodo, setCurrentTodo] = useState(todo);

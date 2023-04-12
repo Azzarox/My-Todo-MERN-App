@@ -1,6 +1,6 @@
 import TodosCatalog from './TodosCatalog';
 
-import styles from './Homepage.module.css';
+import styles from './Homepage.module.scss';
 import { Container } from 'react-bootstrap';
 
 const Homepage = () => {

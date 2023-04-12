@@ -4,7 +4,7 @@ import Homepage from './components/Homepage';
 import Login from './components/Login';
 import NavbarComponent from './components/Navbar';
 
-import './App.css';
+import './App.scss';
 import Register from './components/Register';
 import { AuthContext } from './context/authContext';
 import { useEffect, useState } from 'react';

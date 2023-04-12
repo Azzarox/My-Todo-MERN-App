@@ -1,0 +1,25 @@
+.btn-add-todo {
+    position: relative;
+    text-decoration: none;
+    color: #333;
+
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0; /* goes from left to right */
+        /* right:0 goes from right to left */
+        width: 0%;
+        height: 2px;
+        background-color: #333;
+        transition: all 0.2s ease-in-out;
+    }
+
+    &:hover {
+        color: black;
+    }
+    
+    &:hover::before {
+        width: 100%;
+    }
+}

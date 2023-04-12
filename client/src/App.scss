@@ -1,7 +1,6 @@
-/*
-  Josh's Custom CSS Reset
-  https://www.joshwcomeau.com/css/custom-css-reset/
-*/
+@import '~bootstrap/scss/bootstrap';
+@import 'Global.scss';
+
 *,
 *::before,
 *::after {
@@ -46,4 +45,4 @@ h6 {
     isolation: isolate;
 }
 
-@import 'Global.css';
+

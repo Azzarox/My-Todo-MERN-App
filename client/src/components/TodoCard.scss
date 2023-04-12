@@ -1,0 +1,17 @@
+.rotate-on-hover {
+    transition: transform 0.2s ease-in-out !important;
+}
+
+.rotate-on-hover:hover {
+    transform: rotate(45deg) !important;
+}
+
+.x-icon {
+    cursor: pointer !important;
+    font-size: 20px !important;
+    color: black !important;
+}
+
+.x-icon:hover {
+    color: #68b08f !important;
+}

@@ -1,5 +1,5 @@
 import Spinner from 'react-bootstrap/Spinner';
-import styles from './Spinner.module.css';
+import styles from './Spinner.module.scss';
 
 function CustomSpinner() {
     return (
