@@ -4,7 +4,7 @@ import * as todoServices from '../services/todoServices';
 import { useNavigate } from 'react-router-dom';
 
 // Call when title is changed
-const useSearchDebouncer = (setSearchTodos) => {
+const useSearchDebouncer = (filter, setSearchTodos) => {
     const [title, setTitle] = useState('');
     const [errMessage, setErrMessage] = useState();
 
@@ -13,7 +13,7 @@ const useSearchDebouncer = (setSearchTodos) => {
     useEffect(() => {
         const debounceHandler = debounce(() => {
             todoServices
-                .getAllTodosByTitle(title)
+                .getAllTodosByTitle(filter.toLowerCase(), title)
                 .then((data) => {
                     setSearchTodos(data);
                 })

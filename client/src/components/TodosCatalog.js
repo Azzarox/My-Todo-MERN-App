@@ -12,7 +12,7 @@ import useFilter from '../hooks/useFilter';
 
 const TodosCatalog = () => {
     const { loading, todos, filter, err, setFilter, setTodos } = useFilter();
-    const [_, setTitle] = useSearchDebouncer(setSearchTodos);
+    const [_, setTitle] = useSearchDebouncer(filter, setSearchTodos);
 
     // Call when title is changed
 
