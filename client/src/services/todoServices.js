@@ -6,8 +6,8 @@ const routes = {
     allTodos: (filter) => {
         return `/api/todos?filter=${filter}`;
     },
-    allTodosByTitle: (title) => {
-        return `/api/todos/search?title=${title}`;
+    allTodosByTitle: (filter, title) => {
+        return `/api/todos/search?filter=${filter}&title=${title}`;
     },
 };
 
