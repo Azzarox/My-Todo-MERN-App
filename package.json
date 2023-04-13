@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"cd api && npm start\" \"cd client && npm start\"",
-  },
+    "install-api-deps": "npm install --prefix api",
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Azzarox/My-Todo-MERN-App.git"
