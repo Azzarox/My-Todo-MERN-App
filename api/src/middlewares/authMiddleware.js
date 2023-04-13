@@ -1,4 +1,3 @@
-const { JWT_SECRET } = require('../../constants');
 const jwt = require('../utils/jwt');
 
 const authMiddleware = async (req, res, next) => {
@@ -17,7 +16,7 @@ const authMiddleware = async (req, res, next) => {
     }
 
     try {
-        const user = await jwt.verify(token, JWT_SECRET);
+        const user = await jwt.verify(token, process.env.JWT_SECRET);
         req.user = user;
         next();
     } catch (error) {
