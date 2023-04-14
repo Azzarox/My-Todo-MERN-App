@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const todoController = require('./controllers/todoController');
+
 const authController = require('./controllers/authController');
+const todoController = require('./controllers/todoController');
 
 const authMiddleware = require('./middlewares/authMiddleware');
 

@@ -1,13 +1,12 @@
+const cors = require('cors');
 const express = require('express');
 
 require('dotenv').config();
-const config = require('./config')[process.env.NODE_ENV];
 
+const config = require('./config')[process.env.NODE_ENV];
 const initializeDatabase = require('./config/mongoose');
 
 const app = express();
-
-const cors = require('cors');
 const router = require('./routes');
 
 app.use(express.json());

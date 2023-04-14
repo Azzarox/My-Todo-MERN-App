@@ -1,9 +1,8 @@
 const router = require('express').Router();
 
-
 const todoServices = require('../apiServices/todoServices');
-
 const Todo = require('../models/Todo');
+
 
 const getAllTodos = async (req, res) => {
     try {

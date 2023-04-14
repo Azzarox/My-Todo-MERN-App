@@ -1,13 +1,4 @@
-const initialTodos = require('../data/data');
 const Todo = require('../models/Todo');
-
-// const getAllTodos = () => {
-//     return initialTodos;
-// };
-
-const getTodo = (id) => {
-    return initialTodos.find((todo) => todo.id == id);
-};
 
 const getTodosByRecentWithFilter = (authorId, filter) => {
     if (!filter || filter === 'recent') {
@@ -53,7 +44,6 @@ const getTodosByQuery = (authorId, query, filter) => {
 
 const todoServices = {
     getTodosByRecentWithFilter,
-    getTodo,
     getTodosByQuery,
 };
 

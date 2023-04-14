@@ -1,6 +1,8 @@
 const router = require('express').Router();
+
 const authServices = require('../apiServices/authServices');
 const emptyFieldsExist = require('../validators/emptyFields');
+
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
