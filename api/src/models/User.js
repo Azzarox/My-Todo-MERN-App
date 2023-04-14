@@ -23,11 +23,15 @@ userSchema.pre('save', function (next) {
 });
 
 userSchema.pre('save', function (next) {
-    bcrypt.hash(this.password, 10).then((hash) => {
-        this.password = hash;
-
-        next();
-    });
+    bcrypt
+        .hash(this.password, 10)
+        .then((hash) => {
+            this.password = hash;
+            next();
+        })
+        // .catch((err) => {
+        //     throw err;
+        // });
 });
 
 userSchema.method('validatePassword', function (password) {
