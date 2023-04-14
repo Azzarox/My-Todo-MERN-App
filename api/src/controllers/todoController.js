@@ -1,10 +1,6 @@
 const router = require('express').Router();
 
 
-
-const compareTimestamps = require('../utils/compareTimestamps');
-const createTimestamp = require('../utils/createTimestamp');
-
 const todoServices = require('../apiServices/todoServices');
 
 const Todo = require('../models/Todo');
@@ -25,8 +21,12 @@ const getAllTodos = async (req, res) => {
 const getAllTodosByTitle = async (req, res) => {
     try {
         const title = req.query.title;
-        const filter = req.query.filter
-        let todos = await todoServices.getTodosByQuery(req.user.id, title, filter);
+        const filter = req.query.filter;
+        let todos = await todoServices.getTodosByQuery(
+            req.user.id,
+            title,
+            filter
+        );
         res.status(200).json(todos);
     } catch (error) {
         res.status(400).json({ message: error });
