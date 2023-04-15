@@ -1,0 +1,77 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "MERN Todo Api",
+        "version": "1.0.0",
+        "description": "Rest Api for MERN Todo App"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3001"
+        }
+    ],
+    "paths": {
+        "/api/auth/register": {
+            "post": {
+                "summary": "Create an user",
+                "description":"Creates a user and returs a user \n\n\nDisclaimer: The parameters \"Try out\" button below doesn't work because Swagger doesn't parse the form as form but as table. Therefore the api cannot parse it as FormData and returns undefined for 'username', 'password', 'repass' and hits the stock Mongoose error.",
+                "responses": {
+                    "201": {
+                        "description": "Returns object with the user's id and username",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "formData",
+                        "description": "The username of the user to register",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "The password of the user to register",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "repass",
+                        "in": "formData",
+                        "description": "The repeated password of the user to register",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "password": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "repass": {
+                        "type": "string",
+                        "required": true
+                    }
+                }
+            }
+        }
+    }
+}
