@@ -7,13 +7,9 @@
     },
     "servers": [
         {
-            "url": "http://localhost:3001",
-            "description": "Local server"
-          },
-          {
-            "url": "https://todo-mern-app-juco.onrender.com/",
-            "description": "Deployed server"
-          }
+            "url": "/",
+            "description":"Should work regardless if its on localhost or deployed"
+        }
     ],
     "paths": {
         "/api/auth/register": {
