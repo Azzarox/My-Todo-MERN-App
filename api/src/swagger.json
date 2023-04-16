@@ -104,6 +104,7 @@
         },
         "/api/todos": {
             "get": {
+                "operationId": "getAllUserTodos",
                 "summary": "Queries all the todos. By default its all recent ones.",
                 "tags": ["Todos"],
                 "description": "To use the try out you need to click on the lock at the far right and add a valid jwt token",
@@ -142,10 +143,9 @@
                         }
                     }
                 }
-            }
-        },
-        "/api/todos": {
+            },
             "post": {
+                "operationId": "createTodo",
                 "summary": "Creates todo and automatically adds the user as author",
                 "tags": ["Todos"],
                 "security": [{ "BearerAuth": [] }],
@@ -167,7 +167,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Todo"
+                                "$ref": "#/components/schemas/TodoRequestBody"
                             },
                             "example": {
                                 "title": "Clean the house",
@@ -182,7 +182,17 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/TodoListResponse"
+                                    "$ref": "#/components/schemas/TodoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Unauthorized"
                                 }
                             }
                         }
@@ -308,7 +318,6 @@
         "/api/todos/{id}": {
             "put": {
                 "summary": "Updates the todo and makes it completed by changing the isDone value to true",
-                "description":"The request will work even with empty body",
                 "tags": ["Todos"],
                 "security": [{ "BearerAuth": [] }],
                 "parameters": [
@@ -323,14 +332,13 @@
                         }
                     },
                     {
-                        "name":"id",
-                        "in":"path",
-                        "description":"The id of a todo",
-                        "required":true,
-                        "schema":{
-                            "type":"string"
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id of a todo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
                         }
-                        
                     }
                 ],
                 "requestBody": {
@@ -349,11 +357,89 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Returns the todo object and set as completed",
+                        "description": "Returns the todo object and and isDone value set as true",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/TodoListResponseOnPutRequest"
+                                    "$ref": "#/components/schemas/TodoResponseOnPutRequest"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "When you try to make a request without fulfilling the request body requirements",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "bad request body"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Unauthorized"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Deletes the todo and returns the deleted todo object",
+                "tags": ["Todos"],
+                "security": [{ "BearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token in the format `Bearer <token>`",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzNjY2VhN2UyOWNmNDg3YWNkYjQ0ZSIsInVzZXJuYW1lIjoiMSIsImlhdCI6MTY4MTYzNDA4OH0.O7W0gnF4JAHc59FfRLL070gg9VFpiVBak5rwzP8dsPg"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id of a todo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns the todo object",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error which is different than the 401 unauthorized",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "err": "error message"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Unauthorized"
                                 }
                             }
                         }
@@ -394,77 +480,72 @@
                     }
                 }
             },
-            "TodoListResponse": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "_id": {
-                            "type": "string"
-                        },
-                        "title": {
-                            "type": "string"
-                        },
-                        "description": {
-                            "type": "string"
-                        },
-                        "isDone": {
-                            "type": "boolean",
-                            "default": false
-                        },
-                        "author": {
-                            "type": "string"
-                        },
-                        "createdAt": {
-                            "type": "string",
-                            "format": "date-time"
-                        },
-                        "updatedAt": {
-                            "type": "string",
-                            "format": "date-time"
-                        },
-                        "__v": {
-                            "type": "number"
-                        }
+            "TodoResponse": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "isDone": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "author": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "__v": {
+                        "type": "number"
                     }
                 }
             },
-            "TodoListResponseOnPutRequest": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "_id": {
-                            "type": "string"
-                        },
-                        "title": {
-                            "type": "string"
-                        },
-                        "description": {
-                            "type": "string"
-                        },
-                        "isDone": {
-                            "type": "boolean",
-                            "default": true
-                        },
-                        "author": {
-                            "type": "string"
-                        },
-                        "createdAt": {
-                            "type": "string",
-                            "format": "date-time"
-                        },
-                        "updatedAt": {
-                            "type": "string",
-                            "format": "date-time"
-                        },
-                        "__v": {
-                            "type": "number"
-                        }
+
+            "TodoResponseOnPutRequest": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "isDone": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "author": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "__v": {
+                        "type": "number"
                     }
                 }
             },
-            "Todo": {
+            "TodoRequestBody": {
                 "type": "object",
                 "properties": {
                     "title": {
