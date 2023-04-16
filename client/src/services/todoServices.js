@@ -1,7 +1,5 @@
 import request from './requester';
 
-const apiUrl = 'http://localhost:3001';
-
 const routes = {
     allTodos: (filter) => {
         return `/api/todos?filter=${filter}`;
