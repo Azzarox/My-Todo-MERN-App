@@ -102,7 +102,6 @@
                 }
             }
         },
-
         "/api/todos": {
             "get": {
                 "summary": "Queries all the todos. By default its all recent ones.",
@@ -119,6 +118,59 @@
                             "type": "string",
                             "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzNjY2VhN2UyOWNmNDg3YWNkYjQ0ZSIsInVzZXJuYW1lIjoiMSIsImlhdCI6MTY4MTYzNDA4OH0.O7W0gnF4JAHc59FfRLL070gg9VFpiVBak5rwzP8dsPg"
                         }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a list of the currently logged user's todos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoListResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Unauthorized"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/todos?filter=": {
+            "get": {
+                "summary": "Queries all todos by the user by certain filter value",
+                "description": "To use the try out you need to click on the lock at the far right and add a valid jwt token",
+                "tags": ["Todos"],
+                "security": [{ "BearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token in the format `Bearer <token>`",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzNjY2VhN2UyOWNmNDg3YWNkYjQ0ZSIsInVzZXJuYW1lIjoiMSIsImlhdCI6MTY4MTYzNDA4OH0.O7W0gnF4JAHc59FfRLL070gg9VFpiVBak5rwzP8dsPg"
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": ["recent", "incomplete", "complete"],
+                            "default": "recent"
+                        },
+                        "description": "Filter option to apply on todos. It can be one of the following below. If nothing is set by default it is recent"
                     }
                 ],
                 "responses": {
