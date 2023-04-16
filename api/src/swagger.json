@@ -7,8 +7,7 @@
     },
     "servers": [
         {
-            "url": "/",
-            "description":"Should work regardless if its on localhost or deployed"
+            "url": "/"
         }
     ],
     "paths": {
@@ -105,7 +104,6 @@
         },
         "/api/todos": {
             "get": {
-                "operationId": "getAllUserTodos",
                 "summary": "Queries all the todos. By default its all recent ones.",
                 "tags": ["Todos"],
                 "description": "To use the try out you need to click on the lock at the far right and add a valid jwt token",
@@ -146,7 +144,6 @@
                 }
             },
             "post": {
-                "operationId": "createTodo",
                 "summary": "Creates todo and automatically adds the user as author",
                 "tags": ["Todos"],
                 "security": [{ "BearerAuth": [] }],
@@ -517,7 +514,44 @@
                     }
                 }
             },
-
+            "TodoListResponse": {
+                "type": "array",
+                "items": {
+                    "properties": {
+                        "_id": {
+                            "type": "string",
+                            "example": "643bd63c1cc16abb874dd9f5"
+                        },
+                        "title": {
+                            "type": "string",
+                            "example": " Clean the house"
+                        },
+                        "description": {
+                            "type": "string",
+                            "example": "First start by the living room then the kitchen and lastly the bedroom"
+                        },
+                        "isDone": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "author": {
+                            "type": "string",
+                            "example": "6433ccea7e29cf487acdb44e"
+                        },
+                        "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "updatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "__v": {
+                            "type": "number"
+                        }
+                    }
+                }
+            },
             "TodoResponseOnPutRequest": {
                 "type": "object",
                 "properties": {
