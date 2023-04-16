@@ -13,6 +13,9 @@ require('./config/swagger.config')(app);
 app.use(express.json());
 app.use(cors()); // Needed for api requests
 
+app.get('/', (req, res) => {
+    res.redirect('/api-docs');
+});
 app.use('/api', router);
 
 initializeDatabase(config.DATABASE_URL)
