@@ -14,48 +14,98 @@
         "/api/auth/register": {
             "post": {
                 "summary": "Create an user",
-                "description":"Creates a user and returs a user \n\n\nDisclaimer: The parameters \"Try out\" button below doesn't work because Swagger doesn't parse the form as form but as table. Therefore the api cannot parse it as FormData and returns undefined for 'username', 'password', 'repass' and hits the stock Mongoose error.",
-                "responses": {
-                    "201": {
-                        "description": "Returns object with the user's id and username",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User"
+                "tags": ["Auth"],
+
+                "requestBody": {
+                    "description": "User login data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User",
+                                "example": {
+                                    "username": "exampleuser",
+                                    "password": "examplepassword",
+                                    "repass": "examplepassword"
                                 }
                             }
                         }
                     }
                 },
-                "parameters": [
-                    {
-                        "name": "username",
-                        "in": "formData",
-                        "description": "The username of the user to register",
-                        "required": true,
-                        "type": "string"
+                "responses": {
+                    "201": {
+                        "description": "Returns object with the user's id and username",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": "643baf97930318819d9b6c89",
+                                    "username": "exampleuser"
+                                }
+                            }
+                        }
                     },
-                    {
-                        "name": "password",
-                        "in": "formData",
-                        "description": "The password of the user to register",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "repass",
-                        "in": "formData",
-                        "description": "The repeated password of the user to register",
-                        "required": true,
-                        "type": "string"
+                    "400": {
+                        "description": "Returns message with the error's message",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "err": "The error's message may be different"
+                                }
+                            }
+                        }
                     }
-                ]
+                }
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "summary": "Logs a user and returns a token",
+                "tags": ["Auth"],
+                
+                "requestBody": {
+                    "description": "User login data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserLogin",
+                                "example": {
+                                    "username": "exampleuser",
+                                    "password": "examplepassword"
+                                }
+                            }
+                        }
+                    }
+                },
+
+                "responses": {
+                    "200": {
+                        "description": "Returns a JWT Token which when decoded it contains the user id and username",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJKb2huIERvZSJ9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Returns message with the error's message",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "err": "The error's message may be different"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     },
     "components": {
         "schemas": {
-            "User": {
+            "UserRegister": {
                 "type": "object",
                 "properties": {
                     "username": {
@@ -67,6 +117,19 @@
                         "required": true
                     },
                     "repass": {
+                        "type": "string",
+                        "required": true
+                    }
+                }
+            },
+            "UserLogin": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "password": {
                         "type": "string",
                         "required": true
                     }
