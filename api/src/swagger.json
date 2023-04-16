@@ -304,6 +304,62 @@
                     }
                 }
             }
+        },
+        "/api/todos/{id}": {
+            "put": {
+                "summary": "Updates the todo and makes it completed by changing the isDone value to true",
+                "description":"The request will work even with empty body",
+                "tags": ["Todos"],
+                "security": [{ "BearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token in the format `Bearer <token>`",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzNjY2VhN2UyOWNmNDg3YWNkYjQ0ZSIsInVzZXJuYW1lIjoiMSIsImlhdCI6MTY4MTYzNDA4OH0.O7W0gnF4JAHc59FfRLL070gg9VFpiVBak5rwzP8dsPg"
+                        }
+                    },
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"The id of a todo",
+                        "required":true,
+                        "schema":{
+                            "type":"string"
+                        }
+                        
+                    }
+                ],
+                "requestBody": {
+                    "description": "Todo data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TodoPutRequest"
+                            },
+                            "example": {
+                                "isDone": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns the todo object and set as completed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoListResponseOnPutRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -373,6 +429,41 @@
                     }
                 }
             },
+            "TodoListResponseOnPutRequest": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "isDone": {
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "author": {
+                            "type": "string"
+                        },
+                        "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "updatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "__v": {
+                            "type": "number"
+                        }
+                    }
+                }
+            },
             "Todo": {
                 "type": "object",
                 "properties": {
@@ -383,6 +474,12 @@
                     "description": {
                         "type": "string"
                     }
+                }
+            },
+            "TodoPutRequest": {
+                "type": "object",
+                "properties": {
+                    "isDone": true
                 }
             }
         },
