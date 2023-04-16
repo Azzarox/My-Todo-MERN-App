@@ -3,7 +3,6 @@ const router = require('express').Router();
 const todoServices = require('../apiServices/todoServices');
 const Todo = require('../models/Todo');
 
-
 const getAllTodos = async (req, res) => {
     try {
         const filter = req.query.filter;
@@ -53,6 +52,9 @@ const updateTodo = async (req, res) => {
     try {
         // On the first request returns the old todo in db
         // So it needs new true
+        const { isDone } = req.body;
+        if (isDone !== true) throw new Error('bad request body');
+
         const todo = await Todo.findByIdAndUpdate(
             req.params.id,
             {
@@ -70,17 +72,6 @@ const updateTodo = async (req, res) => {
     }
 };
 
-const getOneTodo = (req, res) => {
-    try {
-        const todo = todoServices.getTodo(req.params.id);
-        res.json(todo);
-    } catch (err) {
-        res.status(404).json({
-            message: 'Resource not found',
-        });
-    }
-};
-
 const deleteTodo = async (req, res) => {
     try {
         const todo = await Todo.findByIdAndDelete(req.params.id);
@@ -91,7 +82,6 @@ const deleteTodo = async (req, res) => {
 };
 
 router.get('/search', getAllTodosByTitle);
-router.get('/:id', getOneTodo);
 router.get('/', getAllTodos);
 
 router.post('/', createTodo);
