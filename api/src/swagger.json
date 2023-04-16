@@ -218,7 +218,7 @@
                         }
                     },
                     {
-                        "name": "title",
+                        "name": "filter",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -484,20 +484,24 @@
                 "type": "object",
                 "properties": {
                     "_id": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "643bd63c1cc16abb874dd9f5"
                     },
                     "title": {
-                        "type": "string"
+                        "type": "string",
+                        "example": " Clean the house"
                     },
                     "description": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "First start by the living room then the kitchen and lastly the bedroom"
                     },
                     "isDone": {
                         "type": "boolean",
                         "default": false
                     },
                     "author": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "6433ccea7e29cf487acdb44e"
                     },
                     "createdAt": {
                         "type": "string",
@@ -517,20 +521,24 @@
                 "type": "object",
                 "properties": {
                     "_id": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "643bd63c1cc16abb874dd9f5"
                     },
                     "title": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "Clean the house"
                     },
                     "description": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "First start by the living room then the kitchen and lastly the bedroom"
                     },
                     "isDone": {
                         "type": "boolean",
                         "default": true
                     },
                     "author": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "6433ccea7e29cf487acdb44e"
                     },
                     "createdAt": {
                         "type": "string",
