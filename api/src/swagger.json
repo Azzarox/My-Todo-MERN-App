@@ -144,6 +144,52 @@
                 }
             }
         },
+        "/api/todos": {
+            "post": {
+                "summary": "Creates todo and automatically adds the user as author",
+                "tags": ["Todos"],
+                "security": [{ "BearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token in the format `Bearer <token>`",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzNjY2VhN2UyOWNmNDg3YWNkYjQ0ZSIsInVzZXJuYW1lIjoiMSIsImlhdCI6MTY4MTYzNDA4OH0.O7W0gnF4JAHc59FfRLL070gg9VFpiVBak5rwzP8dsPg"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Todo data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Todo"
+                            },
+                            "example": {
+                                "title": "Clean the house",
+                                "description": "First start by the living room then the kitchen and lastly the bedroom"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Returns the created todo object",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoListResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/todos?filter=": {
             "get": {
                 "summary": "Queries all todos by the user by certain filter value",
@@ -307,7 +353,8 @@
                             "type": "string"
                         },
                         "isDone": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "default": false
                         },
                         "author": {
                             "type": "string"
@@ -323,6 +370,18 @@
                         "__v": {
                             "type": "number"
                         }
+                    }
+                }
+            },
+            "Todo": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "description": {
+                        "type": "string"
                     }
                 }
             }
