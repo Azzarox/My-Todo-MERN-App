@@ -61,7 +61,7 @@
             "post": {
                 "summary": "Logs a user and returns a token",
                 "tags": ["Auth"],
-                
+
                 "requestBody": {
                     "description": "User login data",
                     "required": true,
@@ -101,6 +101,49 @@
                     }
                 }
             }
+        },
+
+        "/api/todos": {
+            "get": {
+                "summary": "Queries all the todos. By default its all recent ones.",
+                "tags": ["Todos"],
+                "description": "To use the try out you need to click on the lock at the far right and add a valid jwt token",
+                "security": [{ "BearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token in the format `Bearer <token>`",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzNjY2VhN2UyOWNmNDg3YWNkYjQ0ZSIsInVzZXJuYW1lIjoiMSIsImlhdCI6MTY4MTYzNDA4OH0.O7W0gnF4JAHc59FfRLL070gg9VFpiVBak5rwzP8dsPg"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a list of the currently logged user's todos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoListResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Unauthorized"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -134,6 +177,47 @@
                         "required": true
                     }
                 }
+            },
+            "TodoListResponse": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "isDone": {
+                            "type": "boolean"
+                        },
+                        "author": {
+                            "type": "string"
+                        },
+                        "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "updatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "__v": {
+                            "type": "number"
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
             }
         }
     }
