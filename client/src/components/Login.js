@@ -25,13 +25,12 @@ function Login() {
         if (data.token) {
             onLogin(data);
             navigate('/');
-        } else {
+        } else if (data.err) {
             setErr(data);
         }
 
         localStorage.setItem('token', JSON.stringify(data.token));
     }
-
 
     return (
         <Form onSubmit={onSubmitLogin} className="wrapper">
