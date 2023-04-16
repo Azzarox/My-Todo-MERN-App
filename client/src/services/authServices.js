@@ -1,7 +1,6 @@
-const baseUrl = 'http://localhost:3001/api';
 
 export const register = (data) => {
-    return fetch(`${baseUrl}/auth/register`, {
+    return fetch(`${process.env.REACT_APP_API_BASE_URL}/api/auth/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -11,7 +10,7 @@ export const register = (data) => {
 };
 
 export const login = (data) => {
-    return fetch(`${baseUrl}/auth/login`, {
+    return fetch(`${process.env.REACT_APP_API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
