@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 
 import * as authServices from '../services/authServices';
 import { Alert } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/authContext';
 
 function Login() {
@@ -62,9 +62,16 @@ function Login() {
                     name="password"
                 />
             </Form.Group>
+
             <Button variant="dark" type="submit">
                 Login
             </Button>
+            <p style={{ color: 'grey', marginTop: '5px' }}>
+                You don't have an account yet?{' '}
+                <Link style={{ textDecoration: 'none' }} to="/register">
+                    Register
+                </Link>
+            </p>
         </Form>
     );
 }

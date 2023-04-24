@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 
 import { Alert } from 'react-bootstrap';
 import { AuthContext } from '../context/authContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const { onRegister, user } = useContext(AuthContext);
@@ -31,8 +31,6 @@ const Register = () => {
         } else {
             setError(data);
         }
-
-       
     }
 
     return (
@@ -78,6 +76,12 @@ const Register = () => {
             <Button variant="dark" type="submit">
                 Submit
             </Button>
+            <p style={{ color: 'grey', marginTop: '5px' }}>
+                You already have an account?{' '}
+                <Link style={{ textDecoration: 'none' }} to="/login">
+                    Login
+                </Link>
+            </p>
         </Form>
     );
 };
