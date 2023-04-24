@@ -18,9 +18,10 @@ Upon clicking the link to the server it should open documentation of the api don
 | PUT    | `/api/todos/:id`            | { "isDone": "true"}                                                                   | Authorization header in the format `Bearer <token>` and the **id** of the todo in the URL path | `200 OK`: Returns the todo object and and isDone value set as true <br> `400 Bad Request` <br> `401 Unauthorized`              | Updates the todo and makes it completed by changing the isDone value to true                                                                                                       |
 | DELETE | `/api/todos/:id`            | N/A                                                                                   | Authorization header in the format `Bearer <token>` and the **id** of the todo in the URL path | `200 OK`: Returns the deleted todo object <br> `400 Bad Request` <br> `401 Unauthorized`                                       | Deletes the todo and returns the deleted todo object                                                                                                                               |
 
-## Developing and extending the API
-
+## General Information
 All dependencies should be installed before doing anything, and after that there should be `.env` file with the required variables which can be found in [`.env.example`](.env.example).
+### Developing and extending the API
+
 
 There are two _main_ scripts which can be run.
 
@@ -30,7 +31,7 @@ The second one is `npm run start:prod`. This is the production script which star
 
 There are two more script which are only for developing and are related to `eslint`. The one runes the linter to check for errors the other one automatically fixes the found errors if it is possible.
 
-## Deploying changes
+### Deploying changes
 
 To deploy changes they should be committed and pushed to the repository. The service (Render) tracks only the /api folder.
 
