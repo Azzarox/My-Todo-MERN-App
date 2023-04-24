@@ -21,7 +21,7 @@ Before everything all dependencies should be installed if they are not already. 
 
 -   A general one which is inside the root folder. This package.json contains only the `concurrently` package for running with one command both the api and client dev servers.
 -   An _API_ _package.json_ which contains the scripts and dependencies for the api. This is located in the [/api](./api/) folder.
--   An Client package.json which comes with React CRA which contains the dependencies of the client. The package.json is located inside the [/client](./client) folder.
+-   An *Client package.json* which comes with React CRA which contains the dependencies of the client. The package.json is located inside the [/client](./client) folder.
 
 ## Scripts
 
