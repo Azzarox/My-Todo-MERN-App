@@ -35,4 +35,6 @@ There are two more script which are only for developing and are related to `esli
 
 To deploy changes they should be committed and pushed to the repository. The service (Render) tracks only the /api folder.
 
+Disclaimer: If you want to deploy the api on different Render account the only requirements is for environment variables on the Render platform to have DATABASE_URL and JWT_SECRET. 
+
 [Go Back](../README.md)
