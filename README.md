@@ -1,8 +1,28 @@
-# API
-[Link to API Readme.md ](./api/README.md)
-# CLIENT 
-[Link to CLIENT Readme.md](./client/README.md)
+# Application Information
 
-`npm start` - When in the main folder it runs both, the server and client development servers, using `concurrently` package. 
+The following website is a MERN (Mongo, Express, React, Node.js) TODO application where I have built the Api and the Client of the application. The application is not supposed to be something impressive but to practice building rest api and client and also deploying them.
 
-Check [package.json](./package.json)
+-   The api is deployed using Render on: https://todo-mern-app-juco.onrender.com
+-   The client is deployed using Firebase on: https://my-todo-mern-app.web.app/
+
+## API
+
+More information for the API can be found in the corresponding README.md file [here](./api/README.md)
+
+## CLIENT
+
+More information for the CLIENT can be found in the corresponding README.md file [here](./client/README.md)
+
+## General Information
+
+### Developing
+
+Before everything all dependencies should be installed if they are not already. There are _3_ **package.json** files.
+
+-   A general one which is inside the root folder. This package.json contains only the `concurrently` package for running with one command both the api and client dev servers.
+-   An _API_ _package.json_ which contains the scripts and dependencies for the api. This is located in the [/api](./api/) folder.
+-   An Client package.json which comes with React CRA which contains the dependencies of the client. The package.json is located inside the [/client](./client) folder.
+
+### Scripts
+
+`npm start` - as stated above it runs both development servers for the /api and /client.
