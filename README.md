@@ -11,11 +11,11 @@ More information for the *Api* can be found in the corresponding **README.md** f
 
 ## Client
 
-More information for the *Client* can be found in the corresponding **README.md** file [*here*](./client/README.md)
+More information for the *Client* can be found in the corresponding **README.md** file [here](./client/README.md)
 
 ## General Information
 
-### Developing
+## Developing
 
 Before everything all dependencies should be installed if they are not already. There are _3_ **package.json** files.
 
@@ -23,6 +23,6 @@ Before everything all dependencies should be installed if they are not already. 
 -   An _API_ _package.json_ which contains the scripts and dependencies for the api. This is located in the [/api](./api/) folder.
 -   An Client package.json which comes with React CRA which contains the dependencies of the client. The package.json is located inside the [/client](./client) folder.
 
-### Scripts
+## Scripts
 
 `npm start` - as stated above it runs both development servers for the /api and /client.
