@@ -5,13 +5,13 @@ The following website is a MERN (Mongo, Express, React, Node.js) TODO applicatio
 -   The api is deployed using Render on: https://todo-mern-app-juco.onrender.com
 -   The client is deployed using Firebase on: https://my-todo-mern-app.web.app/
 
-## API
+## Api
 
-More information for the API can be found in the corresponding README.md file [here](./api/README.md)
+More information for the *Api* can be found in the corresponding **README.md** file [*here*](./api/README.md)
 
-## CLIENT
+## Client
 
-More information for the CLIENT can be found in the corresponding README.md file [here](./client/README.md)
+More information for the *Client* can be found in the corresponding **README.md** file [*here*](./client/README.md)
 
 ## General Information
 
