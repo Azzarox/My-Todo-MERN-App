@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/authContext';
 
 function NavbarComponent() {
-    const { user, token } = useContext(AuthContext);
+    const { _, token } = useContext(AuthContext);
     return (
         <>
             <Container fluid>
@@ -19,9 +19,6 @@ function NavbarComponent() {
                         <Nav className="">
                             {token ? (
                                 <>
-                                    <Nav.Link as={Link} to="/profile">
-                                        Profile
-                                    </Nav.Link>
                                     <Nav.Link as={Link} to="/logout">
                                         Logout
                                     </Nav.Link>
