@@ -80,10 +80,20 @@ const deleteTodo = async (req, res) => {
         res.status(400).json({ err: err.message });
     }
 };
+const deleteAllTodos = async (req, res) => {
+    try {
+        const todos = await Todo.deleteMany({ author: req.user.id });
+        res.status(200).json(todos);
+        // res.status(200).json({message: "delete"})
+    } catch (err) {
+        res.status(400).json({ err: err.message });
+    }
+};
 
 router.get('/search', getAllTodosByTitle);
-router.get('/', getAllTodos);
 
+router.get('/', getAllTodos);
+router.delete('/', deleteAllTodos);
 router.post('/', createTodo);
 
 router.put('/:id', updateTodo);
