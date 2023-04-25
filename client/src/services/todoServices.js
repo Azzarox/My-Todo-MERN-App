@@ -60,3 +60,12 @@ export const deleteTodo = async (id) => {
         console.log(err);
     }
 };
+
+export const deleteAllTodos = async () => {
+    try {
+        const response = await request('DELETE', `/api/todos`, {});
+        return response;
+    } catch (err) {
+        console.error(err);
+    }
+};
