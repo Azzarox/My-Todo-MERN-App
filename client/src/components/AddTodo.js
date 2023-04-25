@@ -20,7 +20,7 @@ const AddTodo = ({ updateTodos }) => {
             .createTodo({ title, description })
             .then((newTodo) => updateTodos(newTodo))
             .catch((err) => {
-                console.log(err);
+                console.error(err);
             });
     };
 
