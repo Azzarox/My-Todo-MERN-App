@@ -6,9 +6,12 @@ import FilterTodos from './FilterTodos';
 import styles from './TodosCatalog.module.css';
 import SearchTodo from './SearchTodo';
 import AddTodo from './AddTodo';
-import { Alert, Button } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import useSearchDebouncer from '../hooks/useSearchDebouncer';
 import useFilter from '../hooks/useFilter';
+
+import * as todoServices from '../services/todoServices';
+import DeleteAllModal from './DeleteAllModal';
 
 const TodosCatalog = () => {
     const { loading, todos, filter, err, setFilter, setTodos } = useFilter();
@@ -43,6 +46,11 @@ const TodosCatalog = () => {
         );
     }
 
+    async function deleteAllTodos() {
+        await todoServices.deleteAllTodos();
+        setTodos([]);
+    }
+
     let component = loading ? (
         <CustomSpinner />
     ) : (
@@ -71,16 +79,8 @@ const TodosCatalog = () => {
                 )}
 
                 {/* When first loads the page there is no filter so delete all doesn't show up */}
-                {filter && (
-                    <Button
-                        variant="light"
-                        onClick={() => {
-                            setTodos([]);
-                        }}
-                    >
-                        <i className="bi bi-trash"></i> Delete All
-                    </Button>
-                )}
+
+                <DeleteAllModal deleteAllTodos={deleteAllTodos} />
             </Stack>
         </>
     );
