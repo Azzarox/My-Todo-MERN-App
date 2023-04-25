@@ -1,8 +1,8 @@
 const router = require('express').Router();
 
 const authServices = require('../apiServices/authServices');
+const authMiddleware = require('../middlewares/authMiddleware');
 const emptyFieldsExist = require('../validators/emptyFields');
-
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
@@ -40,6 +40,11 @@ router.post('/register', async (req, res) => {
     } catch (err) {
         res.status(400).json({ err: err.message });
     }
+});
+
+router.get('/user', authMiddleware, (req, res) => {
+    const { id, username } = req.user;
+    res.json({ id, username });
 });
 
 module.exports = router;

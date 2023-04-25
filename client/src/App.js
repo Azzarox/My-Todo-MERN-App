@@ -10,11 +10,13 @@ import { AuthContext } from './context/authContext';
 import { useEffect, useState } from 'react';
 import Logout from './components/Logout';
 
+const INITIAL_USER_STATE = {
+    id: '',
+    username: '',
+};
+
 function App() {
-    const [user, setUser] = useState({
-        id: '',
-        username: '',
-    });
+    const [user, setUser] = useState(INITIAL_USER_STATE);
 
     let [token, setToken] = useState(null);
 
@@ -23,26 +25,30 @@ function App() {
         setToken(localStorage.getItem('token'));
     }, []);
 
-    const onRegister = (data) => {
-        setUser(data);
-    };
+    const onRegister = () => {};
 
     const onLogin = (data) => {
         setToken(data);
     };
+
     const onLogout = () => {
         setToken(null);
+        setUser(INITIAL_USER_STATE);
     };
+
+    function updateUser(data) {
+        setUser(data);
+    }
 
     return (
         <>
             <AuthContext.Provider
-                value={{ token, user, onRegister, onLogin, onLogout }}
+                value={{ user, token, onRegister, onLogin, onLogout }}
             >
-                <NavbarComponent />
+                <NavbarComponent  />
 
                 <Routes>
-                    <Route path="/" element={<Homepage />} />
+                    <Route path="/" element={<Homepage updateUser={updateUser} />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/logout" element={<Logout />} />

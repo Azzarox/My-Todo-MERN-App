@@ -48,7 +48,7 @@ export const completeTodo = async (id) => {
         });
         return response;
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 };
 
@@ -57,6 +57,15 @@ export const deleteTodo = async (id) => {
         const response = await request('DELETE', `/api/todos/${id}`, {});
         return response;
     } catch (err) {
-        console.log(err);
+        console.error(err);
+    }
+};
+
+export const deleteAllTodos = async () => {
+    try {
+        const response = await request('DELETE', `/api/todos`, {});
+        return response;
+    } catch (err) {
+        console.error(err);
     }
 };
