@@ -5,8 +5,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/authContext';
 
+
 function NavbarComponent() {
-    const { _, token } = useContext(AuthContext);
+    const { user, token } = useContext(AuthContext);    
+
     return (
         <>
             <Container fluid>
@@ -19,6 +21,14 @@ function NavbarComponent() {
                         <Nav className="">
                             {token ? (
                                 <>
+                                    {user && (
+                                        <Nav.Link as={'span'}>
+                                            <span>
+                                                Welcome, {user.username}
+                                            </span>
+                                        </Nav.Link>
+                                    )}
+
                                     <Nav.Link as={Link} to="/logout">
                                         Logout
                                     </Nav.Link>
