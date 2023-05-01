@@ -1,5 +1,12 @@
 # Application Information
 
+# IMPORTANT:
+***Sometimes due to Render inactivity period, the client, when opened after some time of inactivity, it may not make the requests to the server. In this case its better to click on the link for the api and wait out the initial load (it may take a few minutes).***
+
+**This happens because Render's inactivity is around 15 minutes and after that it stops the server.**
+
+---
+
 The following website is a MERN (Mongo, Express, React, Node.js) TODO application where I have built the Api and the Client of the application. The application is not supposed to be something impressive but to practice building rest api and client and also deploying them.
 
 -   The api is deployed using Render on: https://todo-mern-app-juco.onrender.com
