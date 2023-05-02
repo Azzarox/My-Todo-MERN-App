@@ -5,7 +5,8 @@
 
 **This happens because Render's inactivity is around 15 minutes and after that it stops the server.**
 
-Update: When you open the client app with the https://my-todo-mern-app.web.app/ and if the server is sleeping it would take around 1-2 minutes (sometimes even less) to start the server without the need to go to the https://todo-mern-app-juco.onrender.com to manually start it. You could monitor that in the Network tab of the browser. Usually, the first request will be blocked since the server is sleeping. However, after the "waking up" time passes the next requests should work fine.
+**Update: When you open the client app with the https://my-todo-mern-app.web.app/ and if the server is sleeping it would take around 1-2 minutes (sometimes even less) to start the server without the need to go to the https://todo-mern-app-juco.onrender.com to manually start it. You could monitor that in the Network tab of the browser. Usually, the first request will be blocked since the server is sleeping. However, after the "waking up" time passes the next requests should work fine.**
+
 ---
 
 The following website is a MERN (Mongo, Express, React, Node.js) TODO application where I have built the Api and the Client of the application. The application is not supposed to be something impressive but to practice building rest api and client and also deploying them.
