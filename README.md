@@ -39,6 +39,7 @@ Before everything all dependencies should be installed if they are not already. 
 
 ## Docker
 Both containers are not meant for developing in the sense of developing the app and the changes to be reflected on the container. This is so because there are no volumes attached.
+
 ### API container
 The api container is built from the [Dockerfile](/api/Dockerfile). 
 
@@ -60,4 +61,10 @@ The dot at the end means that the Dockerfile is in the current directory, so you
 To run the container: `docker run -dp 3000:3000`. 
 
 This will run the container in detached mode with 3000 ports exposed. By default it looks for api working on http://localhost:3001. Which is the api container. 
+
+### Docker-Compose
+There is [docker-compose.yml](./docker-compose.yml) file inside the root directory. However, before running the command, the environment variable inside the docker-compose.yml under the **api** service, should be changed to a **mongo connection string**. 
+
+After that run the containers using `docker-compose up` or `docker-compose up -d` for detached mode. 
+*The command should be run from where docker-compose.yml is located*. Also in order to work, the Dockerfiles for the *api* and *client* should be in their respective folders - **/api** and **/client**.
 
