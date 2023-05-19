@@ -1,5 +1,6 @@
 # Application Information
 
+
 # IMPORTANT:
 ***Sometimes due to Render inactivity period, the client, when opened after some time of inactivity, it may not make the requests to the server. In this case its better to click on the link for the api and wait out the initial load (it may take a few minutes).***
 
@@ -35,3 +36,28 @@ Before everything all dependencies should be installed if they are not already. 
 ## Scripts
 
 `npm start` - as stated above it runs both development servers for the /api and /client.
+
+## Docker
+Both containers are not meant for developing in the sense of developing the app and the changes to be reflected on the container. This is so because there are no volumes attached.
+### API container
+The api container is built from the [Dockerfile](/api/Dockerfile). 
+
+To build the image run:  `docker build -t <somenamefortheimage> .`
+
+The dot at the end means that the Dockerfile is in the current directory, so you **need to be** in the directory where is the Dockerfile (which is **/api**) and then run the build command.
+
+To run the container: `docker run -dp 3001:3001 -e DEV_DATABASE_URL="mongo_connection_string"`. 
+
+
+This will run the container in detached mode with 3001 ports exposed. However, you need to provide a database sting in the environment variable.
+
+### Client container
+The client container is built from the [Dockerfile](/client/Dockerfile). To build the image run: 
+`docker build -t <somenamefortheimage> .`
+
+The dot at the end means that the Dockerfile is in the current directory, so you **need to be** in the directory where  the Dockerfile is located (which is **/client**) and then run the build command.
+
+To run the container: `docker run -dp 3000:3000`. 
+
+This will run the container in detached mode with 3000 ports exposed. By default it looks for api working on http://localhost:3001. Which is the api container. 
+
