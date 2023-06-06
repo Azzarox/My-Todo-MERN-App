@@ -1,15 +1,17 @@
 # Application Information
 
 
-# IMPORTANT:
+## IMPORTANT:
 ***Sometimes due to Render inactivity period, the client, when opened after some time of inactivity, it may not make the requests to the server. In this case its better to click on the link for the api and wait out the initial load (it may take a few minutes).***
 
 **This happens because Render's inactivity is around 15 minutes and after that it stops the server.**
 
-**Update: When you open the client app with the https://my-todo-mern-app.web.app/ and if the server is sleeping it would take around 1-2 minutes (sometimes even less) to start the server without the need to go to the https://todo-mern-app-juco.onrender.com to manually start it. You could monitor that in the Network tab of the browser. Usually, the first request will be blocked since the server is sleeping. However, after the "waking up" time passes the next requests should work fine.**
+**Update**: When you open the client app with the https://my-todo-mern-app.web.app/ and if the server is sleeping it would take around 1-2 minutes (sometimes even less) to start the server without the need to go to the https://todo-mern-app-juco.onrender.com to manually start it. You could monitor that in the Network tab of the browser. Usually, the first request will be blocked since the server is sleeping. However, after the "waking up" time passes the next requests should work fine.**
+
+**FIXED**: It should be fixed now and function normally. The fix is using a cron job to make a scheduled call to keep the server running.**
 
 ---
-
+## Overview
 The following website is a MERN (Mongo, Express, React, Node.js) TODO application where I have built the Api and the Client of the application. The application is not supposed to be something impressive but to practice building rest api and client and also deploying them.
 
 -   The api is deployed using Render on: https://todo-mern-app-juco.onrender.com
@@ -23,8 +25,13 @@ More information for the *Api* can be found in the corresponding **README.md** f
 
 More information for the *Client* can be found in the corresponding **README.md** file [here](./client/README.md)
 
-## General Information
+## Test Credentials:
 
+username: *tester*
+
+password: *tester*
+
+## General Information
 ## Developing
 
 Before everything all dependencies should be installed if they are not already. There are _3_ **package.json** files.
